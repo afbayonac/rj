@@ -1,5 +1,5 @@
-var config = require('../config.json');
-var users = config.users;
+var rjcfg = require('../rjcfg.json');
+var users = rjcfg.users;
 var jwt = require('jsonwebtoken');
 
 // controladores de autentificacion
@@ -10,7 +10,7 @@ var sendToken = function(req, res, next){
     {
       user : req.body.user
     }
-    ,config.secret
+    ,rjcfg.secret
   );
 
   res.setHeader('authorization',token)

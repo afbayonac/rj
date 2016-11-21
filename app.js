@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 // uthentication
 var expressJWT = require('express-jwt');
 var router = require('./routes/router');
-var config = require('./config.json')
+var rjcfg = require('./rjcfg.json')
 
 var app = express();
 
@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 //Implementacion del manejador de authetificacion
 //Only can send requests in POST:login
-app.use(expressJWT({secret: config.secret}).unless(
+app.use(expressJWT({secret: rjcfg.secret}).unless(
   {
     path:[
       { url: "/login" , methods: ['POST']}
