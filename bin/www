@@ -7,12 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('ls:server');
 var http = require('http');
+var rjcfg = require('../rjcfg.json');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(rjcfg.env[app.get('env')].port);
+var host = rjcfg.env[app.get('env')].host;
+
 app.set('port', port);
 
 /**
@@ -25,7 +28,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port,host);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -82,9 +85,10 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+var addr = server.address();
+var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log("Server running at the " +  bind)
 }

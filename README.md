@@ -27,10 +27,18 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
 
 
 
-
 ## Web API
 
 
 | URL | METHOD | Descripcion |
 |-----|:--------:|-------------|
 | /login   | POST | autentificacion |
+
+##  Enviroment config
+
+    Configurar la variable de entorno NODE_ENV
+    export NODE_ENV = "[Enviroment]"
+    en el sell o en el Archivo .bashrc
+
+    copiar el archivo rjcfg.json en la raíz del proyecto 
+    NOTE: (no se encuentra en el repo)
