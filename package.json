@@ -1,22 +1,28 @@
 {
-  "name": "remates-judiciales"
-  ,"version": "1.0.0"
-  ,"description": "aplicacion para recolectar informacion a cerca de remates judiciales colombianos"
-  ,"main": "index.js"
-  ,"scripts": {
-    "test": "bash ./test/bash/*"
-    ,"start": "nodemon ./bin/www"
+  "name": "remates-judiciales",
+  "version": "1.0.0",
+  "description": "aplicacion para recolectar informacion a cerca de remates judiciales colombianos",
+  "main": "index.js",
+  "scripts": {
+    "test": "bash ./test/bash/*",
+    "start": "nodemon ./bin/www"
+  },
+  "author": "\"Andres Felipe Bayona Chinchilla\"",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "express-jwt": "^5.1.0",
+    "jsonwebtoken": "^7.1.9",
+    "jwt-simple": "^0.5.0",
+    "mongoose": "^4.7.0",
+    "morgan": "~1.7.0"
   }
-  ,"author": "\"Andres Felipe Bayona Chinchilla\""
-  ,"license": "ISC"
-  ,"dependencies": {
-    "cookie-parser": "~1.4.3"
-    ,"debug": "~2.2.0"
-    ,"body-parser": "~1.15.2"
-    ,"express": "~4.14.0"
-    ,"express-jwt": "^5.1.0"
-    ,"jsonwebtoken": "^7.1.9"
-    ,"jwt-simple": "^0.5.0"
-    ,"morgan": "~1.7.0"
+  ,"repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/afbayonac/remates-judiciales.git"
   }
+  ,"license": "UNLICENSED"
 }
