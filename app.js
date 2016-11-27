@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 // uthentication
 var expressJWT = require('express-jwt');
@@ -10,6 +11,16 @@ var router = require('./routes/router');
 var rjcfg = require('./rjcfg.json')
 
 var app = express();
+
+
+// configire MongoDB
+mongoose.connect('mongodb://localhost:27017/rj');
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("conection MongoDB  ok");
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
