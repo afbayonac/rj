@@ -40,5 +40,9 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
     export NODE_ENV = "[Enviroment]"
     en el sell o en el Archivo .bashrc
 
-    copiar el archivo rjcfg.json en la raíz del proyecto 
+    copiar el archivo rjcfg.json en la raíz del proyecto
     NOTE: (no se encuentra en el repo)
+
+## cron tasks
+
+    Execute cron/jobs.ssh After Environment config
