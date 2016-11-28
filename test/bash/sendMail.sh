@@ -1,6 +1,15 @@
 # send mail with nodemailer
 
-response=$(node -e "require( '/home/felipe/Hobbies/remates-judiciales/controllers/dailyReport.js' )();")
+# path
+if [[ "$NODE_ENV" == "local" ]]; then
+  path="$HOME/Hobbies/remates-judiciales"
+fi
+if [[ "$NODE_ENV" == "development" ]]; then
+  path="$HOME/remates-judiciales"
+fi
+
+module="'$path/controllers/dailyReport.js'"
+response=$( node -e "require( $module ) ();" )
 if [[ "$response" == "Message sent" ]]; then
   echo "daily report ok"
 else
