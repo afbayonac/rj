@@ -12,15 +12,16 @@ en las siguentes tablas se muesta la viabilidad y el avanse en la implementacion
 | web | se publican los editos enla plataforma web |
 | desarrollo | en desarrollo su implementacion |
 | api | posee un api para acceder a los edictos |
-| pruevas | implementacion en face de pruebas |
+| prueba | implementacion en face de pruebas |
+
 
 * __Bogota__
 
 
   | Nombre | Ciudad | Estado |
   |--------|--------|--------|
-  | [EL TIEMPO](www.eltiempo.com) | Bogotá | null |
-  |	[EL ESPECTADOR](www.elespectador.com) |	Bogotá |	null |
+  | [EL TIEMPO](http://clasificados.eltiempo.com/judiciales/remates) | Bogotá | prueba |
+  |	[EL ESPECTADOR](www.elespectador.com) |	Bogotá |	web |
   |	[EL NUEVO SIGLO](www.elnuevosiglo.com.co) | 	Bogotá 	|	null |
   |	[EL PERIÓDICO](www.elperiodico.com.co) |	Bogotá 	|	null |
   |	[Q'HUBO](www.qhubo.com) |	Bogotá 	|	null |
