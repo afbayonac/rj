@@ -43,6 +43,8 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
     copiar el archivo rjcfg.json en la raíz del proyecto
     NOTE: (no se encuentra en el repo)
 
+    nvm change to node v6.6.0
+
 ## cron tasks
 
     Execute cron/jobs.ssh After Environment config
