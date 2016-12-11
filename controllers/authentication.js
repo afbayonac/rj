@@ -9,7 +9,6 @@ var users = rjcfg.users;
 
 var sendToken = function(req, res, next){
 
-
   var token = jwt.sign(
     {
       user : req.body.user

@@ -1,7 +1,7 @@
-var nodemailer = require('nodemailer');
-var rjcfg = require('../rjcfg.json');
+const nodemailer = require('nodemailer');
+const rjcfg = require('../rjcfg.json');
 
-var dailyReport = function(){
+var dailyReport = () => {
   var transporter = nodemailer.createTransport( rjcfg.emailservice );
 
 

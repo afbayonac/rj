@@ -9,4 +9,4 @@ var User = new Schema({
   ,role : { type : String, default : 'cliente' }
 });
 
-module.exports = mongoose.model('users', User);
+module.exports = mongoose.model('user', User);

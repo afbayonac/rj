@@ -1,9 +1,9 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // uthentication
 var expressJWT = require('express-jwt');
@@ -18,9 +18,10 @@ mongoose.connect('mongodb://localhost:27017/rj');
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("conection MongoDB  ok");
-});
+db.once( 'open', () =>  console.log("conection MongoDB  ok") );
+
+// run cron tasks
+var c = require('./cron/cronStart')
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
