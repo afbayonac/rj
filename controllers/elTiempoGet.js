@@ -1,23 +1,21 @@
-
 /*
 http://clasificados.eltiempo.com/judiciales/remates
 
 pagina muestra una lista de remates por un periodo de tiempo limitado
-lalista contiene un link hacia el contenido de cada edicto
+la lista contiene un link hacia el contenido de cada edicto
 
 tiempo promedio de un rquest es 1.45 segundos en mi pc local
 */
+
 const request = require('request');
-const async   = require('async');
 const cheerio = require('cheerio');
 const $ = cheerio.load
 
 const rawSet  = require('./rawSet.js');
 
-const respBad = "el numero de resultados en clasificados.eltiempo.com "
-  +  new Date() + " es 0"
+const respBad = `el numero de resultados en 2kstudio.com ${new Date()} es 0`
 
-var elTiempoGet = function () {
+var elTiempoGet = () => {
 
   var opt = {
     baseUrl : "http://clasificados.eltiempo.com"

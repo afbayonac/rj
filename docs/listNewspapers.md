@@ -21,7 +21,7 @@ en las siguentes tablas se muesta la viabilidad y el avanse en la implementacion
   | Nombre | Ciudad | Estado |
   |--------|--------|--------|
   | [EL TIEMPO](http://clasificados.eltiempo.com/judiciales/remates) | Bogotá | prueba |
-  |	[EL ESPECTADOR](www.elespectador.com) |	Bogotá |	web |
+  |	[EL ESPECTADOR](http://2kstudio.com/judiciales/index.php) |	Bogotá |	prueba  |
   |	[EL NUEVO SIGLO](www.elnuevosiglo.com.co) | 	Bogotá 	|	null |
   |	[EL PERIÓDICO](www.elperiodico.com.co) |	Bogotá 	|	null |
   |	[Q'HUBO](www.qhubo.com) |	Bogotá 	|	null |
