@@ -12,6 +12,12 @@ var rjcfg = require('./rjcfg.json')
 
 var app = express();
 
+/**
+ * optener argumentos.
+ */
+var argv = require('minimist')(process.argv.slice(2));
+//console.dir(argv);
+app.set("env", argv.e)
 
 // configire MongoDB
 mongoose.connect('mongodb://172.18.0.2:27017/rj');
@@ -30,7 +36,7 @@ app.use(cookieParser());
 
 //Implementacion del manejador de authetificacion
 //Only can send requests in POST:login
-app.use(expressJWT({secret: rjcfg.env["local"].secret}).unless(
+app.use(expressJWT({secret: rjcfg.env[app.get("env")].secret}).unless(
   {
     path:[
       { url: "/login" , methods: ['POST']}

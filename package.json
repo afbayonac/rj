@@ -4,8 +4,9 @@
   "description": "aplicacion para recolectar informacion a cerca de remates judiciales colombianos",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/bash/*",
-    "start": "nodemon ./bin/www"
+    "test": "bash ./test/bash/*"
+    ,"start": "nodemon ./bin/www -- -e local"
+    ,"start-dev":"nodemon ./bin/www -- -e development"
   },
   "author": "\"Andres Felipe Bayona Chinchilla\"",
   "license": "UNLICENSED",

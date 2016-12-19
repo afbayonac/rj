@@ -13,7 +13,7 @@ var rjcfg = require('../rjcfg.json');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(rjcfg.env[app.get('env')].port);
+var port = normalizePort(rjcfg.env[app.get("env")].port);
 var host = rjcfg.env[app.get('env')].host;
 
 app.set('port', port);

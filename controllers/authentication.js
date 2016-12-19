@@ -2,10 +2,9 @@ var jwt = require('jsonwebtoken');
 var Users =  require('../models/userM');
 var rjcfg = require('../rjcfg.json');
 var users = rjcfg.users;
+var argv = require('minimist')(process.argv.slice(2));
 
 // controladores de autentificacion
-
-
 
 var sendToken = function(req, res, next){
 
@@ -13,7 +12,7 @@ var sendToken = function(req, res, next){
     {
       user : req.body.user
     }
-    ,rjcfg.env.secret
+    ,rjcfg.env[argv.e].secret
   );
 
   res.setHeader('authorization',token)
@@ -34,7 +33,7 @@ var authenticate = function(req, res, next) {
   Users.findOne({ 'name': 'root' }, function (err, user) {
     if (err) return next(err);
 
-    if (user.password === req.body.password)
+    if (user && user.password === req.body.password)
     return sendToken(req, res, next);
 
     var err = new Error('authentication failed');
