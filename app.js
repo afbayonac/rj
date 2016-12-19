@@ -14,7 +14,7 @@ var app = express();
 
 
 // configire MongoDB
-mongoose.connect('mongodb://localhost:27017/rj');
+mongoose.connect('mongodb://172.18.0.2:27017/rj');
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 //Implementacion del manejador de authetificacion
 //Only can send requests in POST:login
-app.use(expressJWT({secret: rjcfg.secret}).unless(
+app.use(expressJWT({secret: rjcfg.env["local"].secret}).unless(
   {
     path:[
       { url: "/login" , methods: ['POST']}

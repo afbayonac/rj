@@ -35,16 +35,49 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
 | /login   | POST | autentificacion |
 
 ##  Enviroment config
+  copiar el archivo rjcfg.json en la raíz del proyecto
+  NOTE: (no se encuentra en el repo)
 
-    Configurar la variable de entorno NODE_ENV
-    export NODE_ENV = "[Enviroment]"
-    en el sell o en el Archivo .bashrc
-
-    copiar el archivo rjcfg.json en la raíz del proyecto
-    NOTE: (no se encuentra en el repo)
-
-    nvm change to node v6.6.0
 
 ## cron tasks
 
-    Execute cron/jobs.ssh After Environment config
+  Execute cron/jobs.sh After Environment config
+
+## Docker
+
+  El proyecto se maneja mediante imagenes de docker
+
+### subnet
+  docker network create --subnet=172.18.0.0/16 netrj
+### image node:6.9.2
+
+  la imagen adecuada a la nesesidad de el proyecto se
+  encuentra en el sigiente enlace:
+  docker pull afbayonac/remates-judiciales
+
+### docker comand run
+
+*  local :
+    * docker run -t -i -P \
+      -v $(pwd):/src/rj \
+      --name rj \
+      --net netrj \
+      --ip 172.18.0.3 \
+      afbayonac/remates-judiciales:1.0.0 npm start
+    *  docker start -i rj
+
+### image mongo
+
+  la imagen adecuada a la nesesidad de el proyecto se
+  encuentra en el sigiente enlace:
+
+### docker comand RUN
+
+  docker run -d \
+  -p 27017:27017 \
+   --net netrj \
+   --ip 172.18.0.2 \
+   --name mongo \
+    mongo:3.4.0 mongod
+
+NOTE: falta init data base 

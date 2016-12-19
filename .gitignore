@@ -1,3 +1,4 @@
 node_modules/*
+dockerfiles/*
 rjcfg.json
 npm-debug.log

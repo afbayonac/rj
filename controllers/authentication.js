@@ -13,7 +13,7 @@ var sendToken = function(req, res, next){
     {
       user : req.body.user
     }
-    ,rjcfg.secret
+    ,rjcfg.env.secret
   );
 
   res.setHeader('authorization',token)
