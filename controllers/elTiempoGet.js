@@ -9,11 +9,12 @@ tiempo promedio de un rquest es 1.45 segundos en mi pc local
 
 const request = require('request');
 const cheerio = require('cheerio');
+const logger = require('./logger');
 const $ = cheerio.load
 
 const rawSet  = require('./rawSet.js');
 
-const respBad = `el numero de resultados en 2kstudio.com ${new Date()} es 0`
+const respBad = `el numero de resultados en clasificados.eltiempo.com ${new Date()} es 0`
 
 var elTiempoGet = () => {
 
@@ -28,11 +29,11 @@ var elTiempoGet = () => {
     ,gzip : true
   };
 
-  request(opt, (e, req, body) => {
-    if (e) return console.log(e);
+  request(opt, (err, req, body) => {
+    if (err) return logger.warning(`fail request to clasificados.eltiempo.com`);
     // por para ver cuantos remates hay publicados en la pagina
-    // if ( $(body)('.numero-resultados b').text() == 0) return console.log(respBad);
-    if ( $(body)('.img-responsive').length > 1 ) return console.log(respBad);
+    // if ( $(body)('.numero-resultados b').text() == 0) return logger.warning(respBad);
+    if ( $(body)('.img-responsive').length > 1 ) return logger.warning(respBad);
     // filtro de las fechas
     // parce => slect html l => get Array  => filter for zise => filter for date
     opt.qs.rp =  $(body)('.fechapub')
@@ -42,7 +43,7 @@ var elTiempoGet = () => {
           .filter( validateDate )
           .length ;
 
-    if( opt.qs.rp > 0 ) getNodo(opt); else return console.log(respBad);
+    if( opt.qs.rp > 0 ) getNodo(opt); else return logger.warning(respBad);
   });
 }
 
@@ -57,14 +58,14 @@ var validateDate = (el) => {
 
 
 var getNodo = (opt) => {
-  request(opt, (e, req, body) => {
-    if (e) return console.log(e);
+  request(opt, (err, req, body) => {
+    if (err) return logger.warning('Unsuccessful request to a clasificados.eltiempo.com page');
 
     $(body)('.nodo').each((i, el) => {
       opt.uri = el.attribs.href;
-      request(opt, (e, req, body) =>
+      request(opt, (err, req, body) =>
       {
-      if (e) return console.log(e);
+      if (err) return logger.warning('Unsuccessful request to a clasificados.eltiempo.com remate');
       //log( $(body)('.descripcion.clearfix').text() );
         rawSet($(body)('.descripcion.clearfix').text(),
           'http://clasificados.eltiempo.com/judiciales/remates')

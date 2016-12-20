@@ -15,15 +15,14 @@ var app = express();
  * optener argumentos.
  */
 var argv = require('minimist')(process.argv.slice(2));
-//console.dir(argv);
 app.set("env", argv.e)
 
 // configire MongoDB
 mongoose.connect('mongodb://172.18.0.2:27017/rj');
 var db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once( 'open', () =>  console.log("conection MongoDB  ok") );
+db.on('error', () => logger.error('connection error:'));
+db.once( 'open', () =>  logger.notice("conection MongoDB  ok") );
 
 // run cron tasks
 var c = require('./cron/cronStart')

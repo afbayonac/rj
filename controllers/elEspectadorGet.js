@@ -7,6 +7,7 @@ pagina que permite hacer busquedas de remates, paginado listas  el resulado
 
 const request = require('request');
 const cheerio = require('cheerio');
+const logger = require('./logger');
 const $ = cheerio.load
 
 const rawSet  = require('./rawSet.js');
@@ -33,12 +34,13 @@ var opt = {
   ,jar : true // para que guarde cookies
 }
 
-var elEspectadorGEt = () => {
+var elEspectadorGet = () => {
 
-  request(opt, (e, req, body) => {
-    if (e) return console.log(e);
+  request(opt, (err, req, body) => {
+    if (err) return logger.warning('fail request to 2kstudio.com');
     //opt req.headers['set-cookie'][0].split('; ')[0]
     // se le suma + 1 porque la pagiancion comienza desde 1
+    if( !$(body)('.criterio').length ) return logger.warning(respBad);
     Array.from(
         { length : numberPages( $(body)('.criterio').first().text() ) }
         ,(v, k) => k + 1)
@@ -49,8 +51,8 @@ var elEspectadorGEt = () => {
 
 var iteratePages = (page) => {
   opt.qs.page = page ;
-  request(opt, (e, req, body) => {
-    if (e) return console.log(e);
+  request(opt, (err, req, body) => {
+    if (err) return logger.warning('Unsuccessful request to a 2kstudio.com page');
     $(body)('#boton_mas').children().each((i, el) => {
        getNodo(el.attribs.onclick.split('\'')[1]);
     })
@@ -67,11 +69,11 @@ var getNodo = (idenv) => {
     ,method : 'GET'
     ,gzip : true
     }
-    ,(e, req, body) => {
-    if (e) return console.log(e);
+    ,(err, req, body) => {
+    if (err) return logger.warning('Unsuccessful request to a clasificados.eltiempo.com remate');
     rawSet ( $(body)('#detalle_resultado').children().text()
       ,'http://2kstudio.com/judiciales/index.php');
   });
 }
 
-module.exports = elEspectadorGEt;
+module.exports = elEspectadorGet;
