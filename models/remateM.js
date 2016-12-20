@@ -59,6 +59,8 @@ var Remate = new Schema({
   ,dateCreated : { type: Date, default: Date.now }
   ,fuente : String
   ,raw : String
+  //el raw debe generar un codigo unico 
+  ,rawid : { type: String, unique: true }
 });
 
 module.exports = mongoose.model('remate', Remate);
