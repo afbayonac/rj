@@ -1,15 +1,14 @@
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const logger = require('./controllers/logger')
 
 // uthentication
 var expressJWT = require('express-jwt');
 var router = require('./routes/router');
-var rjcfg = require('./rjcfg.json')
-
+var rjcfg = require('./rjcfg.json');
 var app = express();
 
 /**
@@ -29,7 +28,7 @@ db.once( 'open', () =>  console.log("conection MongoDB  ok") );
 // run cron tasks
 var c = require('./cron/cronStart')
 
-app.use(logger('dev'));
+app.use(require('morgan')('dev', { stream: logger.stream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

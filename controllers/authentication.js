@@ -1,7 +1,6 @@
 var jwt = require('jsonwebtoken');
 var Users =  require('../models/userM');
 var rjcfg = require('../rjcfg.json');
-var users = rjcfg.users;
 var argv = require('minimist')(process.argv.slice(2));
 
 // controladores de autentificacion
