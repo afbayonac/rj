@@ -18,7 +18,7 @@ var argv = require('minimist')(process.argv.slice(2));
 app.set("env", argv.e)
 
 // configire MongoDB
-mongoose.connect('mongodb://172.18.0.2:27017/rj');
+mongoose.connect('mongodb://172.19.0.2:27017/rj');
 var db = mongoose.connection;
 
 db.on('error', () => logger.error('connection error:'));
