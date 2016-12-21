@@ -5,6 +5,6 @@ var start = require('./mine');
 
 /* autenticate Route */
 router.post('/login', authenticate );
-router.get('/start', start)
+router.use('/mine', start)
 
 module.exports = router;
