@@ -4,9 +4,9 @@
   "description": "aplicacion para recolectar informacion a cerca de remates judiciales colombianos",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/bash/*"
-    ,"start": "nodemon ./bin/www -- -e local"
-    ,"start-dev":"nodemon ./bin/www -- -e development"
+    "test": "bash ./test/bash/*",
+    "start": "nodemon ./bin/www -- -e local",
+    "start-dev": "nodemon ./bin/www -- -e development"
   },
   "author": "\"Andres Felipe Bayona Chinchilla\"",
   "license": "UNLICENSED",
@@ -24,10 +24,14 @@
     "morgan": "~1.7.0",
     "nodemailer": "^2.6.4",
     "request": "^2.79.0",
-    "require-dir": "^0.3.1"
+    "require-dir": "^0.3.1",
+    "winston": "^2.3.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/afbayonac/remates-judiciales.git"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

@@ -30,25 +30,21 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
 ## Web API
 
 
-| URL | METHOD | Descripcion |
-|-----|:--------:|-------------|
-| /login   | POST | autentificacion |
+| URL | METHOD | Descripcion | Authentication |
+|-----|:------:|-------------|:--------------:|
+| /login | POST | Autentificacion | false |
+| /main | GET | mina reamates | true |
 
 ##  Enviroment config
   copiar el archivo rjcfg.json en la raíz del proyecto
   NOTE: (no se encuentra en el repo)
-
-
-## cron tasks
-
-  Execute cron/jobs.sh After Environment config
 
 ## Docker
 
   El proyecto se maneja mediante imagenes de docker
 
 ### subnet
-  docker network create --subnet=172.18.0.0/16 netrj
+  docker network create --subnet=172.19.0.0/16 netrj
 ### image node:6.9.2
 
   la imagen adecuada a la nesesidad de el proyecto se
@@ -62,7 +58,7 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
       -v $(pwd):/src/rj \
       --name rj \
       --net netrj \
-      --ip 172.18.0.3 \
+      --ip 172.1x.0.3 \
       afbayonac/remates-judiciales:1.0.0 npm start
     *  docker start -i rj
 
@@ -76,8 +72,8 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
   docker run -d \
   -p 27017:27017 \
    --net netrj \
-   --ip 172.18.0.2 \
+   --ip 172.1x.0.2 \
    --name mongo \
     mongo:3.4.0 mongod
 
-NOTE: falta init data base 
+NOTE: falta init data base
