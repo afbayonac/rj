@@ -10,7 +10,7 @@ var dailyReport = () => {
     ,from : '<afbayonac@gmail.com>'
     ,to : 'afbayonac@gmail.com'
     ,text : 'RJ'
-    ,html : '<h1> Hello this is RJ </h1>'
+    ,html : '<h1> RJ </h1>'
   }
 
   transporter.sendMail(mailOptions, (err, info) => {

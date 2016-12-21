@@ -1,7 +1,7 @@
 // logqer for remtes judiciales
 const winston = require('winston');
 
-var myCustomLevels = {
+const myCustomLevels = {
   levels:{
     emerg: 0
     ,alert: 1
@@ -24,14 +24,14 @@ var myCustomLevels = {
   }
 };
 
-logger = new winston.Logger({
+var logger = new winston.Logger({
   levels: myCustomLevels.levels
   ,transports: [
   new (winston.transports.Console)({
     colorize: true
   }),
   new (winston.transports.File)({
-    filename: 'logs/.log'
+    filename: 'logs/remates-judicales.log'
     ,maxsize: 5120
     ,maxFiles:  5
     ,json: false
@@ -44,12 +44,3 @@ module.exports = logger;
 module.exports.stream = {
     write: (message, encoding) =>  logger.info(message.slice(0, -1))
 };
-
-// logger.emerg('hello')
-// logger.alert('hello')
-// logger.crit('hello')
-// logger.error('hello')
-// logger.warning('hello')
-// logger.notice('hello')
-// logger.info('hello')
-// logger.debug('hello')

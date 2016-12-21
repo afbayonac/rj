@@ -12,11 +12,11 @@ const cheerio = require('cheerio');
 const logger = require('./logger');
 const $ = cheerio.load
 
-const rawSet  = require('./rawSet.js');
+const rawSave  = require('./rawSave');
 
 const respBad = `el numero de resultados en clasificados.eltiempo.com ${new Date()} es 0`
 
-var elTiempoGet = () => {
+var elTiempoMine = () => {
 
   var opt = {
     baseUrl : "http://clasificados.eltiempo.com"
@@ -67,11 +67,11 @@ var getNodo = (opt) => {
       {
       if (err) return logger.warning('Unsuccessful request to a clasificados.eltiempo.com remate');
       //log( $(body)('.descripcion.clearfix').text() );
-        rawSet($(body)('.descripcion.clearfix').text(),
+        rawSave($(body)('.descripcion.clearfix').text(),
           'http://clasificados.eltiempo.com/judiciales/remates')
       });
     });
   });
 }
 
-module.exports = elTiempoGet;
+module.exports = elTiempoMine;

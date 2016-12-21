@@ -1,10 +1,10 @@
 var CronJob = require('cron').CronJob;
-var elTiempoGet = require('../../controllers/elTiempoGet.js')
+var elEspectadorGet = require('../../controllers/elEspectadorMine')
 
 var dailyReportT = new CronJob({
   //----------SS mm HH DD MM WW
-  cronTime : '00 00 03  *  *  *'
-  ,onTick : elTiempoGet
+  cronTime : '10  00  03  *  *  *'
+  ,onTick : elEspectadorGet
   ,start : false
   ,timeZone : 'America/Bogota'
 

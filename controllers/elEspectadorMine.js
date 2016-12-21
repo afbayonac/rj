@@ -10,7 +10,7 @@ const cheerio = require('cheerio');
 const logger = require('./logger');
 const $ = cheerio.load
 
-const rawSet  = require('./rawSet.js');
+const rawSave  = require('./rawSave');
 
 const respBad = `el numero de resultados en 2kstudio.com ${new Date()} es 0`
 
@@ -34,7 +34,7 @@ var opt = {
   ,jar : true // para que guarde cookies
 }
 
-var elEspectadorGet = () => {
+var elEspectadorMine = () => {
 
   request(opt, (err, req, body) => {
     if (err) return logger.warning('fail request to 2kstudio.com');
@@ -71,9 +71,9 @@ var getNodo = (idenv) => {
     }
     ,(err, req, body) => {
     if (err) return logger.warning('Unsuccessful request to a clasificados.eltiempo.com remate');
-    rawSet ( $(body)('#detalle_resultado').children().text()
+    rawSave( $(body)('#detalle_resultado').children().text()
       ,'http://2kstudio.com/judiciales/index.php');
   });
 }
 
-module.exports = elEspectadorGet;
+module.exports = elEspectadorMine;
