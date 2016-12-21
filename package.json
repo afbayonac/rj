@@ -1,6 +1,6 @@
 {
   "name": "remates-judiciales",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "aplicacion para recolectar informacion a cerca de remates judiciales colombianos",
   "main": "index.js",
   "scripts": {
