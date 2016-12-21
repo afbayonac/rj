@@ -1,24 +1,40 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const logger = require('./controllers/logger')
 
 // uthentication
 var expressJWT = require('express-jwt');
 var router = require('./routes/router');
-var rjcfg = require('./rjcfg.json')
-
+var rjcfg = require('./rjcfg.json');
 var app = express();
 
-app.use(logger('dev'));
+/**
+ * optener argumentos.
+ */
+var argv = require('minimist')(process.argv.slice(2));
+app.set("env", argv.e)
+
+// configire MongoDB
+mongoose.connect('mongodb://172.18.0.2:27017/rj');
+var db = mongoose.connection;
+
+db.on('error', () => logger.error('connection error:'));
+db.once( 'open', () =>  logger.notice("conection MongoDB  ok") );
+
+// run cron tasks
+var c = require('./cron/cronStart')
+
+app.use(require('morgan')('dev', { stream: logger.stream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Implementacion del manejador de authetificacion
 //Only can send requests in POST:login
-app.use(expressJWT({secret: rjcfg.secret}).unless(
+app.use(expressJWT({secret: rjcfg.env[app.get("env")].secret}).unless(
   {
     path:[
       { url: "/login" , methods: ['POST']}
