@@ -49,11 +49,13 @@ var elTiempoMine = () => {
 
 var validateDate = (el) => {
   a = new Date();
+  // cambia la zona horaria 
+  time = new Date( a.getTime() - 300*60000);
   b = el.split('/').map(Number);
-  // falta probar si la validacion funciona
-  return  b[0] === a.getUTCDate() &&
-          b[1] === a.getUTCMonth() + 1 &&
-          b[2] === a.getUTCFullYear() - 2000 ;
+  // falta probar si la validacion funciona;
+  return  b[0] === time.getUTCDate() &&
+          b[1] === time.getUTCMonth() + 1 &&
+          b[2] === time.getUTCFullYear() - 2000 ;
 }
 
 
