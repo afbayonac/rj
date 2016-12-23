@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "bash ./test/bash/*",
-    "start": "nodemon ./bin/www -- -e local",
-    "start-dev": "nodemon ./bin/www -- -e development"
+    "start": "pm2 start ./bin/www -n rj -- -e development",
+    "run-local": "nodemon ./bin/www -- -e local"
   },
   "author": "\"Andres Felipe Bayona Chinchilla\"",
   "license": "UNLICENSED",

@@ -18,14 +18,13 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
     ├─ cron/                      # Tareas de ejecución programada
     ├─ models/                    # Modelos de la base de datos mongo
     ├─ package.json               # Archivo de configuración de npm
-    ├─ ■ config.json              # Claves de configuración
+    ├─ ■ rjcfg.json               # Claves de configuración
+    ├─ ■ logs/                    # logs
     ├─ app.js                     # Configuración de la aplicación
     ├─ .gitignore                 # archivos ignorados git
     ├─ README.md
     ┴
     NOTE: ■ archivos ignorados
-
-
 
 ## Web API
 
@@ -44,7 +43,8 @@ En el siguiente diagrama se describe la estructura de ficheros que se manejara.
   El proyecto se maneja mediante imagenes de docker
 
 ### subnet
-  docker network create --subnet=172.19.0.0/16 netrj
+  docker network create --subnet=172.1x.0.0/16 netrj
+
 ### image node:6.9.2
 
   la imagen adecuada a la nesesidad de el proyecto se

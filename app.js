@@ -15,14 +15,16 @@ var app = express();
  * optener argumentos.
  */
 var argv = require('minimist')(process.argv.slice(2));
-app.set("env", argv.e)
 
 // configire MongoDB
-mongoose.connect('mongodb://172.19.0.2:27017/rj');
-var db = mongoose.connection;
+let db = rjcfg.db
+mongoose.connect(`mongodb://${db.host}:${db.port}/${db.name}`);
+//mongoose.connect(`mongodb://${db.name.host}:${db.password.port}@${db.host}:${db.port}/${db.name}`);
 
-db.on('error', () => logger.error('connection error:'));
-db.once( 'open', () =>  logger.notice("conection MongoDB  ok") );
+var rjdb = mongoose.connection;
+
+rjdb.on('error', (err) => logger.error(`connection error : ${err}`));
+rjdb.once('open', () =>  logger.notice("conection MongoDB ok" ));
 
 // run cron tasks
 var c = require('./cron/cronStart')
@@ -34,7 +36,7 @@ app.use(cookieParser());
 
 //Implementacion del manejador de authetificacion
 //Only can send requests in POST:login
-app.use(expressJWT({secret: rjcfg.env[app.get("env")].secret}).unless(
+app.use(expressJWT({secret: rjcfg.env[argv.e].secret}).unless(
   {
     path:[
       { url: "/login" , methods: ['POST']}
