@@ -19,12 +19,12 @@ var argv = require('minimist')(process.argv.slice(2));
 // configire MongoDB
 let db = rjcfg.db
 mongoose.connect(`mongodb://${db.host}:${db.port}/${db.name}`);
-//mongoose.connect(`mongodb://${db.name.host}:${db.password.port}@${db.host}:${db.port}/${db.name}`);
+//mongoose.connect(`mongodb://${db.user}:${db.password}@${db.host}:${db.port}/${db.name}`);
 
 var rjdb = mongoose.connection;
 
 rjdb.on('error', (err) => logger.error(`connection error : ${err}`));
-rjdb.once('open', () =>  logger.notice("conection MongoDB ok" ));
+rjdb.once('open', () =>  logger.notice(`conection mongodb://${db.host}:${db.port}/${db.name} ok` ));
 
 // run cron tasks
 var c = require('./cron/cronStart')

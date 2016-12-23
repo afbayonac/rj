@@ -21,6 +21,7 @@ var sendToken = function(req, res, next){
 var authenticate = function(req, res, next) {
 
 
+  console.log(req.body);
 
   if( !req.body.user || !req.body.password ){
     var err = new Error('user and password required');
@@ -29,9 +30,9 @@ var authenticate = function(req, res, next) {
   }
 
 
-  Users.findOne({ 'name': 'root' }, function (err, user) {
+  Users.findOne({ name: req.body.user }, function (err, user) {
     if (err) return next(err);
-
+    console.log(user);
     if (user && user.password === req.body.password)
     return sendToken(req, res, next);
 
