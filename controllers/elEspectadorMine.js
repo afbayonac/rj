@@ -70,7 +70,7 @@ var getNodo = (idenv) => {
     ,gzip : true
     }
     ,(err, req, body) => {
-    if (err) return logger.warning('Unsuccessful request to a clasificados.eltiempo.com remate');
+    if (err) return logger.warning('Unsuccessful request to a 2kstudio.com remate');
     rawSave( $(body)('#detalle_resultado').children().text()
       ,'http://2kstudio.com/judiciales/index.php');
   });

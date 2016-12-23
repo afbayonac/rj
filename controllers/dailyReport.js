@@ -14,7 +14,7 @@ var dailyReport = () => {
   }
 
   transporter.sendMail(mailOptions, (err, info) => {
-    if(err) return logger.warn(err)
+    if(err) return logger.warning(err)
     logger.info('Message sent');
   });
 }
