@@ -1,0 +1,35 @@
+version : '3'
+
+services :
+
+  mongodb:
+    build : "./dockerfiles/mongo"
+    image: mongo-rj
+    ports :
+    - "27017:27017"
+    volumes:
+    - /data/db:/data/db
+    container_name : mongo-rj
+    networks :
+      netrj :
+        ipv4_address: 172.18.0.2
+
+  backend :
+    build : "./dockerfiles/node"
+    image : backend-rj
+    ports :
+    - "8080:3000"
+    container_name : backend-rj
+    volumes:
+    - .:/src/rj
+    networks :
+      netrj :
+        ipv4_address: 172.18.0.3
+
+networks:
+  netrj:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16

@@ -20,7 +20,6 @@ var sendToken = function(req, res, next){
 
 var authenticate = function(req, res, next) {
 
-
   console.log(req.body);
 
   if( !req.body.user || !req.body.password ){

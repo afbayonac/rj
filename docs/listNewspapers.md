@@ -13,7 +13,7 @@ en las siguentes tablas se muesta la viabilidad y el avanse en la implementacion
 | desarrollo | en desarrollo su implementacion |
 | api | posee un api para acceder a los edictos |
 | prueba | implementacion en face de pruebas |
-
+| pdf | publicar pdf |
 
 * __Bogota__
 
@@ -22,7 +22,7 @@ en las siguentes tablas se muesta la viabilidad y el avanse en la implementacion
   |--------|--------|--------|
   | [EL TIEMPO](http://clasificados.eltiempo.com/judiciales/remates) | Bogotá | prueba |
   |	[EL ESPECTADOR](http://2kstudio.com/judiciales/index.php) |	Bogotá |	prueba  |
-  |	[EL NUEVO SIGLO](www.elnuevosiglo.com.co) | 	Bogotá 	|	null |
+  |	[EL NUEVO SIGLO](www.elnuevosiglo.com.co) | 	Bogotá 	|	pdf |
   |	[EL PERIÓDICO](www.elperiodico.com.co) |	Bogotá 	|	null |
   |	[Q'HUBO](www.qhubo.com) |	Bogotá 	|	null |
   |	[EXTRA](bogota.extra.com.co)|	Bogotá |	null |
@@ -196,7 +196,7 @@ en las siguentes tablas se muesta la viabilidad y el avanse en la implementacion
   | Nombre | Ciudad | Estado |
   |--------|--------|--------|
   |	[EL PAÍS](www.elpais.com.co) |	Cali 	| null |
-  |	[DIARIO OCCIDENTE](	www.occidente.co) |	Cali | null |
+  |	[DIARIO OCCIDENTE](	www.occidente.co) |	Cali | pdf |
 
 
     NOTE: algunas direciones no estan completas
