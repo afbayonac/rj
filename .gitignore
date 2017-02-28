@@ -1,5 +1,4 @@
-node_modules/*
-dockerfiles/*
-rjcfg.json
-npm-debug.log
-logs/*
+**/node_modules/*
+**/logs/*
+**/*.log
+backend/rjcfg.json
