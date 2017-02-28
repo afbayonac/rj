@@ -22,6 +22,7 @@ services :
     container_name : backend-rj
     volumes:
     - ./backend:/src/rj
+
     networks :
       netrj :
         ipv4_address: 172.18.0.3
