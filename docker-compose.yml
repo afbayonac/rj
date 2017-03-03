@@ -15,10 +15,10 @@ services :
         ipv4_address: 172.18.0.2
 
   backend :
-    build : "./dockerfiles/node"
+    build : "./dockerfiles/backend"
     image : backend-rj
     ports :
-    - "8080:3000"
+    - "5000:3000"
     container_name : backend-rj
     volumes:
     - ./backend:/src/rj
@@ -26,6 +26,20 @@ services :
     networks :
       netrj :
         ipv4_address: 172.18.0.3
+
+  frontend :
+    build : "./dockerfiles/frontend"
+    image : frontend-rj
+    ports :
+    - "4200:4200"
+    - "49153:49153"
+    container_name : frontend-rj
+    volumes:
+    - ./frontend:/src/rj
+
+    networks :
+      netrj :
+        ipv4_address: 172.18.0.4
 
 networks:
   netrj:
