@@ -1,3 +1,20 @@
-<h1>
-  {{title}}
-</h1>
+<div>
+  <header>
+    <h1>
+      {{title}}
+    </h1>
+    <nav>
+      <ul>
+        <li><a [routerLink]="['/login']">Home</a></li>
+        <li><a [routerLink]="['/login']">Login</a></li>
+        <li><a [routerLink]="['/dashboard']">dashboard</a></li>
+        <li><a [routerLink]="['/login']">logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
