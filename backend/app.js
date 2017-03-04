@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const logger = require('./controllers/logger')
 
 // uthentication
@@ -29,6 +30,7 @@ rjdb.once('open', () =>  logger.notice(`conection mongodb://${db.host}:${db.port
 // run cron tasks
 var c = require('./cron/cronStart')
 
+app.use(cors())
 app.use(require('morgan')('dev', { stream: logger.stream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

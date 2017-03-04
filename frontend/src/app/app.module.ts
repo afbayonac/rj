@@ -6,13 +6,14 @@ import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
+
+import { JwtService } from './jwt/jwt.service'
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    routableComponents,
-    LoginComponent
+    routableComponents
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,9 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     RouterModule
   ],
-  providers: [],
+  providers: [
+    JwtService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,17 @@
 <div class="auth">
-  <div class="">
-    <label for="user">User Name :</label>
-    <input type="text" name="user" (keyup)="value">
-  </div>
-  <div class="">
-    <label for="password">Passwod :</label>
-    <input type="password" name="password" (keyup)="value">
-  </div>
-  <div>
-    <button type="button" name="login" (click)="login()" >Login</button>
-    <a href="">Sing Up</a>
-  </div>
+
+  <form name="login" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate method="POST">
+    <div>
+      <label for="username">Username </label>
+      <input type="text" name="username" [(ngModel)]="creds.username" #username="ngModel" required>
+    </div>
+    <div>
+      <label for="password">Passwod </label>
+      <input type="password" name="password" [(ngModel)]="creds.password" #password="ngModel" required>
+    </div>
+    <div>
+      <button>Login</button>
+    </div>
+  </form>
+
 </div>

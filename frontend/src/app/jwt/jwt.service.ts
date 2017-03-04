@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/map';
@@ -7,35 +7,32 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class  JwtService {
-  public token: string;
+export class  JwtService  {
 
-  constructor(private http: Http) {
-  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  this.token = currentUser && currentUser.token;
+  constructor(private http: Http) {  }
+
+  login(username: string, password: string): Observable<boolean> {
+
+    let url = 'http://localhost:5000/login';
+    let creds = `username=${username}&password=${password}`
+    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+    let options = new RequestOptions({ headers:headers })
+
+    return this.http.post( url, creds, options )
+      .map((response: Response) => this.saveJwt(response));
   }
 
-  login(user: string, password: string): Observable<boolean> {
-    return this.http.post('http://localhost:5000/login',
-      JSON.stringify({ user: user , password: password}))
-      .map((response:Response) => {
-        let token = response.json() && response.json().token;
-        if(token) {
-
-          this.token = token;
-          localStorage.setItem('currentUser',
-            JSON.stringify({ user: user , password: password}));
-
-          return true;
-        }else{
-          return false;
-        }
-      });
+  saveJwt(jwt){
+    console.log(jwt)
+    if(jwt){
+      localStorage.setItem('id_token', jwt)
+      return true;
+    }
+    return false;
   }
 
   logout():void{
-    this.token = null;
-    localStore.removeItem('currentUser')
+    localStorage.removeItem('id_token');
   }
 
 }
