@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     this.jwtService.logout();
   }
 
-  login(){
+  private login(){
     this.jwtService.login(this.creds.username, this.creds.password).
       subscribe(result => {
         if (result === true){

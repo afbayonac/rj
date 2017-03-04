@@ -7,8 +7,9 @@ import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 
+import { AuthModule } from './auth/auth.module'
 import { JwtService } from './jwt/jwt.service'
-
+import { CanActivateJwtService } from './CanActivate/CanActibateJwt.service'
 
 @NgModule({
   declarations: [
@@ -19,11 +20,14 @@ import { JwtService } from './jwt/jwt.service'
     BrowserModule,
     FormsModule,
     HttpModule,
+    // en lugar de AUTH_PROVIDERS
+    AuthModule,
     AppRoutingModule,
     RouterModule
   ],
   providers: [
-    JwtService
+    JwtService,
+    CanActivateJwtService
   ],
   bootstrap: [AppComponent]
 })
