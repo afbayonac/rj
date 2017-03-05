@@ -1,3 +1,4 @@
+//TODO change name for user
 const jwt = require('jsonwebtoken');
 const Users =  require('../models/userM');
 const rjcfg = require('../rjcfg.json');

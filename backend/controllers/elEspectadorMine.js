@@ -36,13 +36,14 @@ var opt = {
 
 var elEspectadorMine = (dateInit) => {
 
-  // falta editar la peticion en para este valor sea o no indefinido  
-  if (!dateInit){
+//TODO frontend falta editar la peticion en para este valor sea indefinido o date
+  if (dateInit){
     opt.formData['validez_init'] =  dateInit ;
   }else{
     opt.formData['validez_init'] = parceDate(new Date);
   }
 
+  //console.log(opt.formData['validez_init'] , dateInit);
 
 
   request(opt, (err, req, body) => {
