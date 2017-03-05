@@ -1,5 +1,5 @@
 /*
-http://2kstudio.com/judiciales/detalle.php?idenv=2016040316400827
+http://2kstudio.com/judiciales/
 
 pagina que permite hacer busquedas de remates, paginado listas  el resulado
 
@@ -34,12 +34,22 @@ var opt = {
   ,jar : true // para que guarde cookies
 }
 
-var elEspectadorMine = () => {
+var elEspectadorMine = (dateInit) => {
+
+  // falta editar la peticion en para este valor sea o no indefinido  
+  if (!dateInit){
+    opt.formData['validez_init'] =  dateInit ;
+  }else{
+    opt.formData['validez_init'] = parceDate(new Date);
+  }
+
+
 
   request(opt, (err, req, body) => {
     if (err) return logger.warning('fail request to 2kstudio.com');
     //opt req.headers['set-cookie'][0].split('; ')[0]
     // se le suma + 1 porque la pagiancion comienza desde 1
+    //console.log( numberPages( $(body)('.criterio').first().text() ));
     if( !$(body)('.criterio').length ) return logger.warning(respBad);
     Array.from(
         { length : numberPages( $(body)('.criterio').first().text() ) }

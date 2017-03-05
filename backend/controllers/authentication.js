@@ -15,7 +15,8 @@ var sendToken = function(req, res, next){
   );
 
   res.setHeader('authorization',token)
-  res.status(200).send();
+  res.status(200).json({ success: true, token: token  });
+
 }
 
 var authenticate = function(req, res, next) {
