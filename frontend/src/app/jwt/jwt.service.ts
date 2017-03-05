@@ -27,7 +27,6 @@ export class  JwtService  {
   public saveJwt(jwt){
 
     if(jwt && jwt.token){
-      console.log('ok')
       localStorage.setItem('id_token', jwt.token)
       return true;
     }
