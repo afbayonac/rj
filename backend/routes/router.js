@@ -1,10 +1,12 @@
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
 var authenticate = require('../controllers/authentication');
 var start = require('./mine');
+const remate = require('./remate');
 
 /* autenticate Route */
 router.post('/login', authenticate );
 router.use('/mine', start)
+// remates router
+router.use('/remate', remate)
 
 module.exports = router;

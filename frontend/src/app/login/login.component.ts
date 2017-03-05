@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         }else{
           this.error = 'Username or password is incorrect';
         }
-        console.log(result)
+      //  console.log(result)
       })
   }
 

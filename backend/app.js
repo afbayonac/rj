@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('mongoose-middleware').initialize(mongoose);
 const cors = require('cors')
 const logger = require('./controllers/logger')
 
@@ -16,6 +17,7 @@ var app = express();
  * optener argumentos.
  */
 var argv = require('minimist')(process.argv.slice(2));
+
 
 // configire MongoDB
 let db = rjcfg.db
