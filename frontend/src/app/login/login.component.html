@@ -1,17 +1,7 @@
-<div class="auth">
 
-  <form name="login" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate method="POST">
-    <div>
-      <label for="username">Username </label>
-      <input type="text" name="username" [(ngModel)]="creds.username" #username="ngModel" required>
-    </div>
-    <div>
-      <label for="password">Passwod </label>
-      <input type="password" name="password" [(ngModel)]="creds.password" #password="ngModel" required>
-    </div>
-    <div>
-      <button>Login</button>
-    </div>
-  </form>
-
-</div>
+<form [formGroup]="loginForm" (ngSubmit)="login($event)">
+  <input formControlName="username" type="text"  placeholder="username">
+  <input formControlName="password" type="password" placeholder="password">
+  <button type="submit">Log in</button>
+  <span *ngIf="error" >{{error}}</span>
+</form>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router'
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
@@ -21,6 +22,7 @@ import { CanActivateJwtService } from './CanActivate/CanActibateJwt.service'
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     // en lugar de AUTH_PROVIDERS
     AuthModule,
     AppRoutingModule,
