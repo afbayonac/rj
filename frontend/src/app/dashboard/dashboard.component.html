@@ -1,3 +1,15 @@
-<p>
-  dashboard works!
-</p>
+
+<div class="">
+  <form name="mine" (ngSubmit)="f.form.valid && mine()" #f="ngForm" >
+    <p>
+      Al minar se ejecuta el script que recorre todos los fuentes de informacion
+    </p>
+    <div>
+      <label for="dateInit">Desde</label>
+      <input type="date" name="dateInit"
+       [(ngModel)]="body.dateInit" #dateInit="ngModel"
+       placeholder="AAAA-MM-DD (opcional)" >
+    </div>
+    <button>Mine</button>
+  </form>
+</div>

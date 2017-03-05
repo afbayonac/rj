@@ -5,6 +5,8 @@ import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
 
+declare const localStorage: any;
+
 @Injectable()
 export class  JwtService  {
   jwtHelper =new JwtHelper();

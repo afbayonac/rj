@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 
+//import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AuthModule } from './auth/auth.module'
 import { JwtService } from './jwt/jwt.service'
 import { CanActivateJwtService } from './CanActivate/CanActibateJwt.service'

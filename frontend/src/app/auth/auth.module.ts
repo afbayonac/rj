@@ -4,9 +4,9 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 function authHttpServiceFactory(http: Http, options: RequestOptions){
   return new AuthHttp(new AuthConfig({
-       globalHeaders: [{'Content-Type':'application/json'}],
+       globalHeaders: [{'Content-Type':'application/x-www-form-urlencoded'}],
    }
-  ), http, options)
+ ), http, options)
 }
 
 @NgModule({
@@ -16,8 +16,7 @@ function authHttpServiceFactory(http: Http, options: RequestOptions){
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     }
-  ],
-  declarations: []
+  ]
 })
 
 export class AuthModule { }
