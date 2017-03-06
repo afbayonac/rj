@@ -8,6 +8,8 @@ import {
 
 import { AuthHttp } from 'angular2-jwt';
 
+import { RemateListComponent } from '../remate/remate-list/remate-list.component'
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

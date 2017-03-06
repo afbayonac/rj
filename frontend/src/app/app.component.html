@@ -5,10 +5,9 @@
     </h1>
     <nav>
       <ul>
-        <li><a [routerLink]="['/login']">Home</a></li>
-        <li><a [routerLink]="['/login']">Login</a></li>
+        <li *ngIf="!jwtService.autenticated()"><a [routerLink]="['/login']">Login</a></li>
+        <li *ngIf="jwtService.autenticated()"><a [routerLink]="['/']" (click)='jwtService.logout()'>logout</a></li>
         <li><a [routerLink]="['/dashboard']">dashboard</a></li>
-        <li><a [routerLink]="['/login']">logout</a></li>
       </ul>
     </nav>
   </header>

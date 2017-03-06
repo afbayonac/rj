@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { JwtService } from './jwt/jwt.service'
 
 @Component({
   selector: 'app-root',
@@ -9,4 +9,5 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'rj';
+  constructor (private jwtService : JwtService) {}
 }

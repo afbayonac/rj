@@ -1,0 +1,17 @@
+<div>
+  <button [disabled]="page==1" (click)='first()'>First</button>
+  <button [disabled]="page==1" (click)='previous()'>Previous</button>
+  <button [disabled]="page==remateNumber/count" (click)='next()'>Next</button>
+  <button [disabled]="page==remateNumber/count" (click)='last()'>Last</button>
+</div>
+<div>
+  <div class="" *ngFor='let remate of response'>
+    <a  [routerLink]="['./remate/'+remate._id]">
+      <div >
+        <b>{{remate.fuente}}</b>
+        <b>{{remate.dateCreated}}</b>
+        <span>{{remate.raw.replace('/([\\t]+(?=[\\t])|^\s+|\s+$)/g','').slice(0,100)}}</span>
+      </div>
+    </a>
+  </div>
+</div>

@@ -11,12 +11,15 @@ import { AppRoutingModule, routableComponents } from './app-routing.module';
 //import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AuthModule } from './auth/auth.module'
 import { JwtService } from './jwt/jwt.service'
+import { RemateService } from './remate/remate.service'
 import { CanActivateJwtService } from './CanActivate/CanActibateJwt.service'
+import { RemateListComponent } from './remate/remate-list/remate-list.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    routableComponents
+    routableComponents,
+    RemateListComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { CanActivateJwtService } from './CanActivate/CanActibateJwt.service'
   ],
   providers: [
     JwtService,
-    CanActivateJwtService
+    CanActivateJwtService,
+    RemateService
   ],
   bootstrap: [AppComponent]
 })
