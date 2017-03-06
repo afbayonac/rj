@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
   private login(){
+
+    if(this.loginForm.valid)
     this.jwtService.login(this.loginForm.value.username, this.loginForm.value.password).
       subscribe(result => {
         if (result === true){
@@ -40,7 +42,6 @@ export class LoginComponent implements OnInit {
         }else{
           this.error = 'Username or password is incorrect';
         }
-      //  console.log(result)
       })
   }
 
