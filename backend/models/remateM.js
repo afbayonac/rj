@@ -1,5 +1,4 @@
 /*
-
   juzgado -> municipio -> departamento // dificil direcion
   proceso -> numero de radicion // en el edito
 
@@ -33,34 +32,33 @@ radiodifusora local, la publicación se hará por cualquier otro medio,
 
 En ningún caso podrá prescindirse de las publicaciones exigidas en este artículo."
 
-
 */
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var Remate = new Schema({
-  remate :[{
-    item : String
-    ,location : String
-    ,base : Number
-  }]
-  ,demandante : [{
-    name : String
-    ,cc : String
-  }]
-  ,demandante : [{
-    name : String
-    ,cc : String
-  }]
-  ,juzgado : String
-  ,proceso : String
-  ,fechaLicitacion : Date
-  ,dateCreated : { type: Date, default: Date.now }
-  ,fuente : String
-  ,raw : String
-  //el raw debe generar un codigo unico 
-  ,rawid : { type: String, unique: true }
-});
+  remate: [{
+    item: String,
+    location: String,
+    base: Number
+  }],
+  demandante: [{
+    name: String,
+    cc: String
+  }],
+  demandando: [{
+    name: String,
+    cc: String
+  }],
+  juzgado: String,
+  proceso: String,
+  fechaLicitacion: Date,
+  dateCreated: {type: Date, default: Date.now},
+  fuente: String,
+  raw: String,
+  // El raw debe generar un codigo unico
+  rawid: { type: String, unique: true }
+})
 
-module.exports = mongoose.model('remate', Remate);
+module.exports = mongoose.model('remate', Remate)
