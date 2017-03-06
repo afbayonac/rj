@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
 
   mine(e){
     console.log(this.mineForm.valid);
-    if(this.mineForm.validator)
+    if(this.mineForm.valid)
       this.authHttp.post(
       `http://localhost:5000/mine`,
       `dateInit=${this.mineForm.value.dateInit}`)

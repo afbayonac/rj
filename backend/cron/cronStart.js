@@ -1,2 +1,2 @@
-const requireDir = require('require-dir');
-var   dir = requireDir('./tasks')
+const requireDir = require('require-dir')
+requireDir('./tasks')
