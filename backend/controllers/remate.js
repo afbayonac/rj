@@ -10,10 +10,9 @@ exports.getByID = () => {
 
 exports.list = (req, res, next) => {
   var count = req.query.count || 5
-  var page = req.query.pagee || 1
-
+  var page = req.query.page || 1
   var options = {
-    start: (page - 1) + count,
+    start: (page - 1) * count,
     count: count
   }
 

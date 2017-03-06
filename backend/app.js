@@ -30,7 +30,15 @@ rjdb.once('open', () => logger.notice(`conection mongodb://${db.host}:${db.port}
 // run cron tasks
 require('./cron/cronStart')
 
-app.use(cors())
+let corsOpt = {
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'allowedHeaders': ['Content-Type', 'Authorization'],
+  'preflightContinue': false,
+  'optionsSuccessStatus': 204
+}
+
+app.use(cors(corsOpt))
 app.use(require('morgan')('dev', {stream: logger.stream}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
