@@ -8,14 +8,14 @@ import {
 
 import { AuthHttp } from 'angular2-jwt';
 
-import { RemateListComponent } from '../remate/remate-list/remate-list.component'
+import { RemateListComponent } from './remate-list/remate-list.component'
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './remates.component.html',
+  styleUrls: ['./remates.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class RematesComponent implements OnInit {
   public mineForm: FormGroup;
 
   constructor(private authHttp: AuthHttp, private fb: FormBuilder) { }

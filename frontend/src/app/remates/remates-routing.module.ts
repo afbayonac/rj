@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { RemateListComponent } from '../remate/remate-list/remate-list.component'
-import { DashboardComponent } from './dashboard.component'
+import { RemateListComponent } from './remate-list/remate-list.component'
+import { RematesComponent } from './remates.component'
 import { CanActivateJwtService} from '../CanActivate/CanActibateJwt.service';
 
 const routes : Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: RematesComponent,
     canActivate: [ CanActivateJwtService],
     children: [
       { path: '', component: RemateListComponent },
@@ -20,9 +20,9 @@ const routes : Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class RematesRoutingModule {}
 
 export const routableComponents = [
   RemateListComponent,
-  DashboardComponent
+  RematesComponent
 ]
