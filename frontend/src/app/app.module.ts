@@ -11,15 +11,15 @@ import { AppRoutingModule, routableComponents } from './app-routing.module';
 //import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AuthModule } from './auth/auth.module'
 import { JwtService } from './jwt/jwt.service'
-import { RemateService } from './remate/remate.service'
+import { RemateService } from './remates/remate.service'
 import { CanActivateJwtService } from './CanActivate/CanActibateJwt.service'
-import { RemateListComponent } from './remate/remate-list/remate-list.component'
+import { RemateListComponent } from './remates/remate-list/remate-list.component'
 
-import { DashboardModule } from './dashboard/dashboard.module'
+import { RematesModule } from './remates/remates.module'
 
 @NgModule({
   imports: [
-    DashboardModule,
+    RematesModule,
     BrowserModule,
     FormsModule,
     HttpModule,
