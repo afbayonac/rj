@@ -11,7 +11,7 @@ import { JwtService } from '../jwt/jwt.service'
 
 
 @Injectable()
-export class CanActivateJwtService implements CanActivate {
+export class JwtGuard implements CanActivate {
 
   constructor(private router: Router, private jwtService:JwtService){}
 

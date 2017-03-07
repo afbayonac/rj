@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { RemateListComponent } from './remate-list/remate-list.component'
 import { RematesComponent } from './remates.component'
-import { CanActivateJwtService} from '../CanActivate/CanActibateJwt.service';
+import { JwtGuard } from './JwtGuard.service';
 
 const routes : Routes = [
   {
     path: 'dashboard',
     component: RematesComponent,
-    canActivate: [ CanActivateJwtService],
+    canActivate: [ JwtGuard],
     children: [
       { path: '', component: RemateListComponent },
     ]

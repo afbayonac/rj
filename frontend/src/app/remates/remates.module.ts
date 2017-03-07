@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RematesRoutingModule, routableComponents } from './remates-routing.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtGuard } from './JwtGuard.service'
+import { RemateService } from '../remates/remate.service'
+
 
 @NgModule({
   declarations: [routableComponents],
@@ -11,7 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule ],
   exports: [],
-  providers: []
+  providers: [
+    JwtGuard,
+    RemateService
+  ]
 })
 
 export class RematesModule {}
