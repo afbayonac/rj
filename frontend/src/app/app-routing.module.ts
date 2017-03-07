@@ -9,11 +9,11 @@ import { CanActivateJwtService} from './CanActivate/CanActibateJwt.service';
 const routes : Routes = [
   {path: "", pathMatch: "full", redirectTo: "/login"},
   {path: "login", component: LoginComponent },
-  {
-    path: "dashboard",
-    component: DashboardComponent,
-    canActivate: [CanActivateJwtService] 
-  }
+  // {
+  //   path: "dashboard",
+  //   component: DashboardComponent,
+  //   canActivate: [CanActivateJwtService]
+  // }
 ]
 
 @NgModule({
@@ -25,5 +25,5 @@ export class AppRoutingModule {}
 
 export const routableComponents = [
   LoginComponent,
-  DashboardComponent
+//  DashboardComponent
 ]
