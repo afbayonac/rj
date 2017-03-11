@@ -33,7 +33,6 @@ export class RematesComponent implements OnInit {
   }
 
   mine(e){
-    console.log(this.mineForm.valid);
     if(this.mineForm.valid)
       this.authHttp.post(
       `http://localhost:5000/mine`,

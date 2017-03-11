@@ -27,7 +27,6 @@ export class RemateListComponent implements OnInit {
      .subscribe( result => {
        this.remateNumber = JSON.parse(result._body).total;
        this.response = JSON.parse(result._body).results;
-       console.log(JSON.parse(result._body).results);
      })
   }
 
