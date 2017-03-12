@@ -12,7 +12,14 @@ const rawSave = require('./rawSave')
 
 const respBad = `el numero de resultados en 2kstudio.com ${new Date()} es 0`
 
-var parceDate = d => `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`
+var parceDate = d => {
+  let mes = d.getUTCMonth() + 1
+  let dia = d.getUTCDate()
+  if (String(mes).length === 1) mes = '0' + mes
+  if (String(dia).length === 1) mes = '0' + dia
+  return `${d.getUTCFullYear()}-${mes}-${dia}`
+}
+
 // determina el numero de paginas que se deben buscar
 var numberPages = (n) => (n % 5 === 0) ? n / 5 : (n - n % 5) / 5 + 1
 
@@ -32,13 +39,11 @@ var opt = {
 }
 
 var elEspectadorMine = (dateInit) => {
-// TODO frontend falta editar la peticion en para este valor sea indefinido o date
-  if (dateInit) {
+  if (dateInit !== '') {
     opt.formData['validez_init'] = dateInit
   } else {
     opt.formData['validez_init'] = parceDate(new Date())
   }
-
   request(opt, (err, req, body) => {
     if (err) return logger.warning('fail request to 2kstudio.com')
     // opt req.headers['set-cookie'][0].split('; ')[0]
