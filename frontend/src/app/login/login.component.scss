@@ -1,0 +1,17 @@
+@import '../../styles';
+
+.login{
+  max-width: 350px;
+  align-items: center;
+  text-align: center;
+}
+
+.error{
+  font-size: 0.7em;
+  //color: $primary;
+}
+
+form {
+  margin: 0 auto;
+  max-width:200px;
+}

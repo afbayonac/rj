@@ -13,7 +13,7 @@ import { RemateListComponent } from './remate-list/remate-list.component'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './remates.component.html',
-  styleUrls: ['./remates.component.css']
+  styleUrls: ['./remates.component.scss']
 })
 export class RematesComponent implements OnInit {
   public mineForm: FormGroup;
@@ -28,7 +28,7 @@ export class RematesComponent implements OnInit {
 
   ngOnInit() {
     this.mineForm = this.fb.group({
-      dateInit : ["", Validators.pattern(/20[0-1][0-9]-[0-1][0-2]-[0-3][0-9]/)]
+      dateInit : ["", Validators.pattern(/20[0-1][0-9]-[0-1][0-9]-[0-3][0-9]/i)]
     });
   }
 

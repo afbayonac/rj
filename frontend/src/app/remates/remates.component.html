@@ -1,9 +1,12 @@
-
-<div>
-  <form  [formGroup]="mineForm" (ngSubmit)="mine($event)">
-    <input formControlName="dateInit" type="text" placeholder="AAAA-MM-DD">
-    <button type="submit">Mine</button>
-    <span *ngIf="error" >{{error}}</span>
-    <router-outlet></router-outlet>
-  </form>
-</div>
+<router-outlet></router-outlet>
+<md-card class="mine">
+  <md-card-content>
+    <form  [formGroup]="mineForm" (ngSubmit)="mine($event)">
+      <md-input-container class="example-full-width">
+        <input mdInput formControlName="dateInit" type="text" size='10' placeholder="AAAA-MM-DD">
+      </md-input-container>
+      <button md-button type="submit">Mine</button>
+      <span *ngIf="error" >{{error}}</span>
+    </form>
+  </md-card-content>
+</md-card>

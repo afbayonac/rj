@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router'
+import { MaterialModule } from '@angular/material'
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
@@ -14,6 +15,7 @@ import { RematesModule } from './remates/remates.module'
 
 @NgModule({
   imports: [
+    MaterialModule,
     RematesModule,
     BrowserModule,
     FormsModule,

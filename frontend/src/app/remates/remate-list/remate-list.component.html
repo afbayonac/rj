@@ -1,10 +1,30 @@
-<div>
-  <button type="button" [disabled]="page==1" (click)='first()'>First</button>
-  <button type="button" [disabled]="page==1" (click)='previous()'>Previous</button>
-  <button type="button" [disabled]="page==remateNumber/count" (click)='next()'>Next</button>
-  <button type="button" [disabled]="page==remateNumber/count" (click)='last()'>Last</button>
-</div>
-<br>
+<md-grid-list cols='3' rowHeight='7:3' >
+  <md-grid-tile  *ngFor='let remate of response' color='blue'>
+    <md-card>
+      <md-card-title>
+        {{remate.proceso ? remate.proceso : ':('}}
+      </md-card-title>
+      <md-card-subtitle>
+        {{remate.fuente.slice(7,40)}} <br>
+        {{remate.dateCreated}}
+      </md-card-subtitle>
+      <md-card-content>
+        {{remate.raw.slice(1,80)}} ...
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+</md-grid-list>
+
+<md-card>
+  <md-card-content class="bar">
+    <button md-button type="button" [disabled]="page==1" (click)='first()'>First</button>
+    <button md-button type="button" [disabled]="page==1" (click)='previous()'>Previous</button>
+    <button md-button type="button" [disabled]="page==remateNumber/count" (click)='next()'>Next</button>
+    <button md-button type="button" [disabled]="page==remateNumber/count" (click)='last()'>Last</button>
+  </md-card-content>
+</md-card>
+
+<!-- <br>
 <br>
 <div>
   <div class="" *ngFor='let remate of response'>
@@ -23,4 +43,4 @@
     </a>
     <br>
   </div>
-</div>
+</div> -->

@@ -1,7 +1,27 @@
-
-<form [formGroup]="loginForm" (ngSubmit)="login($event)">
-  <input formControlName="username" type="text"  placeholder="username">
-  <input formControlName="password" type="password" placeholder="password">
-  <button type="submit">Log in</button>
-  <span *ngIf="error" >{{error}}</span>
-</form>
+<md-card class="login">
+  <md-card-title>
+    Log In
+  </md-card-title>
+  <md-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="login($event)">
+      <table>
+        <tr>
+          <md-input-container class="example-full-width">
+            <input mdInput formControlName="username" type="text"  placeholder="username">
+          </md-input-container>
+        </tr>
+        <tr>
+          <md-input-container class="example-full-width">
+            <input mdInput formControlName="password" type="password" placeholder="password">
+          </md-input-container>
+        </tr>
+        <tr>
+          <button md-button type="submit">Log in</button>
+        </tr>
+        <tr>
+          <span class='error' *ngIf="error" >{{error}}</span>
+        </tr>
+      </table>
+    </form>
+  </md-card-content>
+</md-card>
