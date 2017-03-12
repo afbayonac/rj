@@ -23,5 +23,5 @@ export interface RemateJSON {
 }
 
 export class Remate {
-  constructor (private remate:RemateJSON){};
+  constructor (public remate:RemateJSON){};
 }

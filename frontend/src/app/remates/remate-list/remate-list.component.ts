@@ -5,7 +5,7 @@ import { RemateService } from '../remate.service'
 @Component({
   selector : 'remate-list',
   templateUrl: './remate-list.component.html',
-  styleUrls: ['./remate-list.component.css']
+  styleUrls: ['./remate-list.component.scss']
 })
 
 export class RemateListComponent implements OnInit {
@@ -13,7 +13,7 @@ export class RemateListComponent implements OnInit {
   remateNumber = 0;
   page = 1;
   count = 10;
-  public response : Array<Object>;
+  public response : Array<RemateJSON>;
   valid = false;
 
   constructor(private remateService:RemateService) {}
@@ -25,8 +25,8 @@ export class RemateListComponent implements OnInit {
   getPage(page:number, count:number) {
     this.remateService.getList(this.page, this.count )
      .subscribe( result => {
-       this.remateNumber = JSON.parse(result._body).total;
-       this.response = JSON.parse(result._body).results;
+       this.remateNumber = result.total;
+       this.response = result.results;
      })
   }
 
