@@ -1,0 +1,32 @@
+<md-grid-list *ngIf='remate' cols='2' rowHeight='1:1' >
+  <md-grid-tile>
+      <md-card>
+        <md-card-title>
+          {{remate.proceso ? remate.proceso : ':('}}
+        </md-card-title>
+        <md-card-subtitle>
+          {{remate.fuente.slice(7,40)}} <br>
+          {{remate.dateCreated}}
+        </md-card-subtitle>
+        <md-card-content>
+          {{remate._id}}
+          {{remate.juzgado}}
+          {{remate.fechaLicitacion}}
+          <div *ngFor='let Propertie of  remate.Properties'>
+            {{Propertie | json}}
+          </div>
+        </md-card-content>
+      </md-card>
+  </md-grid-tile>
+  <md-grid-tile>
+      <md-card>
+        <md-card-content>
+          {{remate.raw}}
+        </md-card-content>
+      </md-card>
+  </md-grid-tile>
+</md-grid-list>
+<div class="nav">
+  <a md-mini-fab routerLink="../"><md-icon>check</md-icon></a>
+  <a md-fab routerLink="../"><md-icon>edit</md-icon></a>
+</div>

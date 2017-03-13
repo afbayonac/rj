@@ -1,17 +1,19 @@
 <md-grid-list cols='3' rowHeight='7:3' >
   <md-grid-tile  *ngFor='let remate of response' color='blue'>
-    <md-card>
-      <md-card-title>
-        {{remate.proceso ? remate.proceso : ':('}}
-      </md-card-title>
-      <md-card-subtitle>
-        {{remate.fuente.slice(7,40)}} <br>
-        {{remate.dateCreated}}
-      </md-card-subtitle>
-      <md-card-content>
-        {{remate.raw.slice(1,80)}} ...
-      </md-card-content>
-    </md-card>
+    <div [routerLink]="[remate._id]">
+      <md-card>
+        <md-card-title>
+          {{remate.proceso ? remate.proceso : ':('}}
+        </md-card-title>
+        <md-card-subtitle>
+          {{remate.fuente.slice(7,40)}} <br>
+          {{remate.dateCreated}}
+        </md-card-subtitle>
+        <md-card-content>
+          {{remate.raw.slice(1,80)}} ...
+        </md-card-content>
+      </md-card>
+    </div>
   </md-grid-tile>
 </md-grid-list>
 
@@ -23,24 +25,3 @@
     <button md-button type="button" [disabled]="page==remateNumber/count" (click)='last()'>Last</button>
   </md-card-content>
 </md-card>
-
-<!-- <br>
-<br>
-<div>
-  <div class="" *ngFor='let remate of response'>
-    <a  [routerLink]="['./remate/'+remate._id]">
-      <div >
-        <div>
-          <span>{{remate.dateCreated}}</span>
-        </div>
-        <div>
-          <b>{{remate.fuente}}</b>
-        </div>
-        <div>
-          <span>{{remate.raw.replace('/([\\t]+(?=[\\t])|^\s+|\s+$)/g','').slice(0,50)}}</span>
-        </div>
-      </div>
-    </a>
-    <br>
-  </div>
-</div> -->

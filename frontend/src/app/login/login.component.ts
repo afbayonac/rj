@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.jwtService.login(this.loginForm.value.username, this.loginForm.value.password).
       subscribe(result => {
         if (result === true){
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/remates']);
         }else{
           this.error = 'Username or password is incorrect';
         }

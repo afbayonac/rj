@@ -11,7 +11,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { RemateListComponent } from './remate-list/remate-list.component'
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-remates',
   templateUrl: './remates.component.html',
   styleUrls: ['./remates.component.scss']
 })
@@ -37,7 +37,7 @@ export class RematesComponent implements OnInit {
       this.authHttp.post(
       `http://localhost:5000/mine`,
       `dateInit=${this.mineForm.value.dateInit}`)
-        .subscribe( res => console.log( JSON.stringify(res)) );
+        .subscribe( res => console.log(JSON.stringify(res)) );
   }
 
 }
