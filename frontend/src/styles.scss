@@ -5,10 +5,11 @@
 @include mat-core();
 
 // Define a theme.
-$primary: mat-palette($mat-cyan);
-$accent:  mat-palette($mat-grey);
+$primary:  mat-palette($mat-cyan, 500, A200, A700);
+$accent: mat-palette($mat-grey, 600, 50, 800);
+$warn:    mat-palette($mat-pink);
 
-$theme: mat-dark-theme($primary, $accent);
+$theme: mat-light-theme($primary, $accent, $warn);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);

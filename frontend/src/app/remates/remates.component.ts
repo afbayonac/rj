@@ -17,27 +17,28 @@ import { RemateListComponent } from './remate-list/remate-list.component'
 })
 export class RematesComponent implements OnInit {
   public mineForm: FormGroup;
+  public error: String;
+  constructor (private authHttp: AuthHttp, private fb: FormBuilder) { }
 
-  constructor(private authHttp: AuthHttp, private fb: FormBuilder) { }
-
-  private dateInitValidator(c: FormControl){
-    if( c.value === ''){
+  private dateInitValidator (c: FormControl) {
+    if (c.value === '') {
       return true;
     }
   }
 
-  ngOnInit() {
+  ngOnInit () {
     this.mineForm = this.fb.group({
       dateInit : ["", Validators.pattern(/20[0-1][0-9]-[0-1][0-9]-[0-3][0-9]/i)]
     });
   }
 
-  mine(e){
+  mine (e) {
     if(this.mineForm.valid)
       this.authHttp.post(
       `http://localhost:5000/mine`,
       `dateInit=${this.mineForm.value.dateInit}`)
         .subscribe( res => console.log(JSON.stringify(res)) );
+    else this.error = 'no valid'
   }
 
 }
