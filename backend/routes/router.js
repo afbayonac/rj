@@ -7,6 +7,6 @@ const remate = require('./remate')
 router.post('/login', authenticate)
 router.use('/mine', start)
 // remates router
-router.use('/remate', remate)
+router.use('/remates', remate)
 
 module.exports = router

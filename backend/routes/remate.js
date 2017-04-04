@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const remate = require('../controllers/remate')
 
-router.get('/list', remate.list)
+router.get('/', remate.list)
+router.get('/:id', remate.getByID)
+router.post('/:id', remate.update)
 // (req ,res, next) =>{
 //   res.json({ok:"ok"})
 // });

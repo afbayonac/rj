@@ -1,11 +1,21 @@
 const remateM = require('../models/remateM')
 
-exports.create = () => {
+exports.create = (req, res, next) => {
 
 }
 
-exports.getByID = () => {
+exports.getByID = (req, res, next) => {
+  var id = req.params.id
 
+  remateM.findById(id)
+  .exec((error, result) => {
+    if (!error) {
+      console.log(result)
+      return res.status(200).json(result)
+    } else {
+      return next(error)
+    }
+  })
 }
 
 exports.list = (req, res, next) => {
@@ -30,10 +40,10 @@ exports.list = (req, res, next) => {
   // Return res.status(200).json({ok:'ok'});
 }
 
-exports.update = () => {
+exports.update = (req, res, next) => {
 
 }
 
-exports.drop = () => {
+exports.drop = (req, res, next) => {
 
 }
