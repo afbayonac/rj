@@ -1,5 +1,11 @@
 // logqer for remtes judiciales
 const winston = require('winston')
+const fs = require('fs')
+
+if (!fs.existsSync('./logs')) {
+  // Create the directory if it does not exist
+  fs.mkdirSync('./logs')
+}
 
 const myCustomLevels = {
   levels: {
@@ -31,7 +37,8 @@ var logger = new winston.Logger({
       colorize: true
     }),
     new (winston.transports.File)({
-      filename: 'logs/remates-judicales.log',
+      filename: `./logs/remates-judicales.log`,
+      timestamp: true,
       maxsize: 5120,
       maxFiles: 5,
       json: false
