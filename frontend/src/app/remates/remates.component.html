@@ -1,8 +1,0 @@
-<router-outlet></router-outlet>
-    <form class="mat-cyan mine" [formGroup]="mineForm" (ngSubmit)="mine($event)">
-      <md-input-container class="example-full-width">
-        <input mdInput formControlName="dateInit" type="text" size='10' placeholder="AAAA-MM-DD">
-      </md-input-container>
-      <button md-button type="submit">Mine</button>
-      <span *ngIf="error" >{{error}}</span>
-    </form >
