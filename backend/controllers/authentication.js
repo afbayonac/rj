@@ -16,6 +16,7 @@ var sendToken = function (req, res, next) {
   )
 
   res.setHeader('authorization', token)
+  // TODO remove body token
   res.status(200).json({success: true, token: token})
 }
 

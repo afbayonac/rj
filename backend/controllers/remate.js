@@ -1,7 +1,7 @@
 const remateM = require('../models/remateM')
 
 exports.create = (req, res, next) => {
-
+  res.status(503).json({mess: 'servicio en construccion'})
 }
 
 exports.getByID = (req, res, next) => {
@@ -41,9 +41,9 @@ exports.list = (req, res, next) => {
 }
 
 exports.update = (req, res, next) => {
-
+  res.status(503).json({mess: 'servicio en construccion'})
 }
 
 exports.drop = (req, res, next) => {
-
+  res.status(503).json({mess: 'servicio en construccion'})
 }

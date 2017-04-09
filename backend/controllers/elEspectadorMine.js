@@ -39,7 +39,7 @@ var opt = {
 }
 
 var elEspectadorMine = (dateInit) => {
-  if (dateInit !== '') {
+  if (dateInit !== '' && dateInit) {
     opt.formData['validez_init'] = dateInit
   } else {
     opt.formData['validez_init'] = parceDate(new Date())

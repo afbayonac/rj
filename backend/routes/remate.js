@@ -2,6 +2,7 @@ const router = require('express').Router()
 const remate = require('../controllers/remate')
 
 router.get('/', remate.list)
+router.post('', remate.create)
 router.get('/:id', remate.getByID)
 router.post('/:id', remate.update)
 // (req ,res, next) =>{
