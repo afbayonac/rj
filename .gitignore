@@ -1,4 +1,5 @@
-**/node_modules/*
-**/logs/*
-**/*.log
-backend/rjcfg.json
+# Dependency directories
+node_modules/
+
+# Logs
+*.log
