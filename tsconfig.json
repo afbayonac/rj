@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "removeComments": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+           "./node_modules/@types/"
+         ],
+    "lib": [
+      "es2016"
+    ]
+  },"filesGlob": [
+      "!node_modules",
+      "node_modules/@types/**/*.d.ts",
+      "src/**/*.d.ts",
+      "src/**/*.ts",
+      "test/**/*.d.ts",
+      "test/**/*.ts"
+  ]
+}
