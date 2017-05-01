@@ -3,3 +3,6 @@ node_modules/
 
 # Logs
 *.log
+
+# files after transpiler
+dist/
