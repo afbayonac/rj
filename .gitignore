@@ -6,3 +6,6 @@ node_modules/
 
 # files after transpiler
 dist/
+
+# enviroments and keys
+src/app/cfg/env/**/*.ts
