@@ -8,6 +8,6 @@ authRouter.get('/auth/facebook', passport.authenticate('facebook', {
   scope: permisosFacebook()
 }))
 
-authRouter.get('/auth/facebook/callback', passport.authenticate('facebook',  {
+authRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
     session: false
 }), passportFacebookJWT)

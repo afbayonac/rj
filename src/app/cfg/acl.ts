@@ -8,7 +8,7 @@ export const aclist = [
     ]
   },
   {
-    roles: 'client',
+    roles: 'user',
     allows: [
       {resources: '/', permissions: ['GET']}
     ]

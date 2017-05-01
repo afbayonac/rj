@@ -2,7 +2,7 @@ export function permisosFacebook () {
    return [
     'public_profile',
     // 'user_friends',
-    'email',
+    'email'
   //   'user_actions.books',
   //   'user_actions.fitness',
   //   'user_actions.music',

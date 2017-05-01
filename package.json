@@ -4,9 +4,10 @@
   "description": "",
   "main": "bin/www",
   "scripts": {
-    "test": "gulp mocha",
+    "test": "gulp mocha:auto",
     "build": "gulp ts",
-    "start": "pm2 src/app/bin/www"
+    "start": "pm2 src/app/bin/www",
+    "develop": "gulp nodemon"
   },
   "repository": {
     "type": "git",
@@ -30,9 +31,24 @@
   },
   "homepage": "https://github.com/afbayonac/rj#readme",
   "devDependencies": {
+    "@types/acl": "^0.4.32",
+    "@types/body-parser": "^1.16.3",
+    "@types/chai": "^3.5.2",
+    "@types/debug": "0.0.29",
+    "@types/jsonwebtoken": "^7.2.0",
+    "@types/mocha": "^2.2.41",
+    "@types/mongoose": "^4.7.11",
+    "@types/morgan": "^1.7.32",
     "@types/node": "^7.0.14",
+    "@types/passport": "^0.3.3",
+    "@types/passport-facebook": "^2.1.4",
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-mocha": "^4.3.1",
+    "gulp-nodemon": "^2.2.1",
     "gulp-typescript": "^3.1.6",
+    "mocha": "^3.3.0",
+    "nodemon": "^1.11.0",
     "require-dir": "^0.3.1",
     "tslint": "^5.1.0",
     "tslint-config-standard": "^5.0.2",
