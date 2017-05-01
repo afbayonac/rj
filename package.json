@@ -1,0 +1,33 @@
+{
+  "name": "rj",
+  "version": "0.0.0",
+  "description": "",
+  "main": "bin/www",
+  "scripts": {
+    "test": "gulp mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afbayonac/rj.git"
+  },
+  "keywords": [
+    "remates",
+    "judiciales",
+    "colombia",
+    "api",
+    "rest",
+    "api-rest",
+    "clasificados",
+    "venta",
+    "compra"
+  ],
+  "author": "afbayonac <afbayonac@gmail.com>",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/afbayonac/rj/issues"
+  },
+  "homepage": "https://github.com/afbayonac/rj#readme",
+  "devDependencies": {
+    "tslint-config-standard": "^5.0.2"
+  }
+}

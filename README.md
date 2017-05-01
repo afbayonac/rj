@@ -1,6 +1,8 @@
 rj
 ---
-remates judiciales Colombianos
+API-REST remates judiciales Colombianos
+
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 **Gias de desarrollo.**
 
