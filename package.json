@@ -5,8 +5,8 @@
   "main": "bin/www",
   "scripts": {
     "test": "gulp mocha:auto",
-    "build": "gulp ts",
-    "start": "pm2 src/app/bin/www",
+    "build": "npm i && gulp ts",
+    "start": "npm run build && pm2 start dist/app/bin/www.js --name=rj",
     "develop": "gulp nodemon"
   },
   "repository": {
