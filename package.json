@@ -6,7 +6,7 @@
   "scripts": {
     "test": "gulp mocha:auto",
     "build": "npm i && gulp ts",
-    "start": "npm run build && pm2 start dist/app/bin/www.js --name=rj",
+    "start": "npm run build && pm2-docker start dist/app/bin/www.js ",
     "develop": "gulp nodemon"
   },
   "repository": {

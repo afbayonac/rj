@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  rj:
+    build:
+      context: .
+      args:
+        env: production
+    image: rj
+    ports:
+    - "3000:3000"
+    volumes:
+    - .:/app
+    environment:
+      DEBUG: "rj:*"
+    stdin_open: true
+    tty: true
+    command: npm start
+    container_name : prod-rj-rj
+    networks :
+      prodrj :
+        ipv4_address: 172.20.0.2
+
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - /data/db:/data/db
+    container_name : prod-mg-rj
+    networks :
+      prodrj :
+        ipv4_address: 172.20.0.3
+
+networks:
+  prodrj:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16

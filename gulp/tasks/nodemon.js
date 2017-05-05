@@ -11,7 +11,7 @@ gulp.task('nodemon', ['ts'], () => {
     // guard
     // para no alterar el entorno de prodicion con test
     env: {'NODE_ENV': process.env.NODE_ENV !== 'production'
-          ? process.env.NODE_ENV || 'development' : 'development'}
+          ? process.env.NODE_ENV || 'develop' : 'development'}
   })
   .on('start', ['mocha'])
 })

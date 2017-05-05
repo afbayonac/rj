@@ -12,30 +12,12 @@ API-REST remates judiciales Colombianos
 * [Gulp Organization & Structure](https://blog.simpleblend.net/gulp-organization-structure/)
 * [JSDoc](http://usejsdoc.org/)
 
-#### Doker
+#### Doker compose
 
-###### contrucion de la imagen
-
-    $ docker build . --build-arg env=<NODE_ENV> -t <img-name>
-
-  _ejemplo_
-
-    docker build . --build-arg env=test -t test-rj
-
-######  inizilizar contenerdor
-
-    $ docker run -di -p 3000:3000 -v $(pwd):/app --name <cont-name> <img-name> <comand>
-
-    NOTE: la opcion -d para que corra en background
-
-  _ejemplo_
-
-    docker run -di -p 3000:3000 -v $(pwd):/app --name test-rj test-rj /bin/bash
-
-#### exec comand
-
-    $ docker exec -i -t <cont-name> <comand>
-
-  _ejemplo_
-
-    $ docker exec -i -t  test-rj /bin/bash
+###### test
+    $ docker-compose -f docker-compose.test.yml up -d --build
+    $ docker attach <container_name>
+###### develop
+    $ docker-compose -f docker-compose.develop.yml up -d --build
+###### production
+    $ docker-compose -f docker-compose.yml up -d --build
