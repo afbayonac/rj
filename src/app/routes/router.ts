@@ -12,4 +12,4 @@ router.use(middlewareJwt)
 router.use(middlewareAcl)
 
 // AuthRouter
-router.use(authRouter)
+router.use('/auth', authRouter)
