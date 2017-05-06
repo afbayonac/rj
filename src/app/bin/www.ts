@@ -1,3 +1,7 @@
+// soporte de sourcemaps
+import {install} from 'source-map-support'
+install()
+
 import * as http from 'http'
 import * as debug from 'debug'
 
