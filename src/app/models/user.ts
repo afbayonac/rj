@@ -19,12 +19,12 @@ export const UserSchema: Schema = new Schema({
   }],
   gender: String,
   role: {
-    type: {type: String},
+    type: String,
     default: 'user',
     enum: ['user', 'admin']
   },
   location: {
-      type: String,
+      type: {type: String},
       coordinates: [Number]
   },
   cred: {

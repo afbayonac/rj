@@ -54,7 +54,7 @@ describe ('Remate Model', function () {
       }
       expect(remate.rawid).to.be.a('string')
       expect(remate.raw).to.be.a('string')
-      expect(remate.item[1].location.coordinates[1]).to.be.a('string')
+      expect(remate.item[0].location.coordinates[1]).to.be.a('number')
       done()
     })
   })
