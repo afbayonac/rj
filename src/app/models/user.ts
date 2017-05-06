@@ -2,7 +2,6 @@ import {Document, Schema, Model, model} from 'mongoose'
 import {IUser} from './IUser'
 import {createHmac, randomBytes } from 'crypto'
 
-
 export interface IUserModel extends IUser, Document {
   encryptPassword (password: string, salt: string): string
   getRandomSalt (password: string, salt: string): string
@@ -20,7 +19,7 @@ export const UserSchema: Schema = new Schema({
   }],
   gender: String,
   role: {
-    type: String,
+    type: {type: String},
     default: 'user',
     enum: ['user', 'admin']
   },

@@ -8,8 +8,7 @@ import * as faker from 'faker'
 
 const db = cfg.mongodb
 
-describe ('Encrypt Password', function () {
-
+describe ('User Model', function () {
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
     .then(function ()  {
