@@ -6,7 +6,7 @@ acl.allow(aclist)
 
 acl.addUserRoles('guest',['guest'])
 acl.addUserRoles('admin',['admin'])
-acl.addUserRoles('client',['client'])
+acl.addUserRoles('user',['user'])
 
 export const middlewareAcl = (req, res, next) => {
   // TODO buscar la mejor manera de separar el path de la query
