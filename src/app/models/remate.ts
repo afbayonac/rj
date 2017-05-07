@@ -28,9 +28,9 @@ export const UserSchema: Schema = new Schema({
   juzgado: String,
   proceso: String,
   fechaLicitacion: Date,
-  fuente: { type: String, required: false },
-  raw: { type: String, required: false },
-  rawid: { type: String, unique: true, required: false }
+  fuente: { type: String, required: true },
+  raw: { type: String, required: true },
+  rawid: { type: String, unique: true }
 })
 
 let generateRawId = (raw: string): string => {

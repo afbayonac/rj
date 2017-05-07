@@ -3,6 +3,6 @@
     "interface-over-type-literal": true,
     "max-line-length": [
       true,
-      80
+      140
     ]
 }

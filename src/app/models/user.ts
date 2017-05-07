@@ -30,7 +30,8 @@ export const UserSchema: Schema = new Schema({
   cred: {
     password: String,
     salt: String
-  }
+  },
+  dateBorn: Date
 })
 
 let encryptPassword = (password: string, salt: string): string => {
