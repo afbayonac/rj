@@ -60,6 +60,7 @@
   },
   "dependencies": {
     "acl": "^0.4.10",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "jsonwebtoken": "^7.4.0",

@@ -1,3 +1,4 @@
+require('mongoose').Promise = require('bluebird')
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
