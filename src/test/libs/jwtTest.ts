@@ -9,7 +9,8 @@ import {
   encodeToken,
   decodeToken,
   refreshToken,
-  verifyToken
+  verifyToken,
+  stdResToken
 } from '../../app/lib/jwt'
 
 describe('json web tokens Lib', function () {
@@ -57,6 +58,12 @@ describe('json web tokens Lib', function () {
       expect(decode).to.be.a('object')
       done()
     })
+  })
+
+  it('stanadard response Toker', function (done) {
+    let stanadard = stdResToken(user)
+    expect(stanadard).to.have.all.keys('access_token', 'token_type', 'expired_in')
+    done()
   })
 
 })

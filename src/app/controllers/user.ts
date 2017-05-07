@@ -18,7 +18,7 @@ export const createUser = (req, res, next) => {
   ]}).then(
     function (user) {
       if (user) {
-        res.status(400).json({'mess': 'username or email registered'})
+        return res.status(400).json({'mess': 'username or email registered'})
       }
       new User({
         name: newUser.name,

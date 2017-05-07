@@ -49,6 +49,20 @@ describe('create User API', function () {
     })
   })
 
+  it('fail create user', function (done) {
+    api
+    .post('/users')
+    .send(user)
+    .end(function (err, res) {
+      if (err) {
+        done(err)
+      }
+      expect(res.status).to.be.equal(400,'status expect 200')
+      expect(res.body).to.have.all.keys('mess')
+      done()
+    })
+  })
+
   it('contrast database', function (done) {
     User.findOne({'emails.email': user.emails[0].email}, function (err, userDB) {
       if (err) {
