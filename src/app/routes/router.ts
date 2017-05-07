@@ -2,7 +2,7 @@ import {Router} from 'express'
 import {middlewareJwt} from '../lib/middlewareJwt'
 import {middlewareAcl} from '../lib/middlewareAcl'
 import {authRouter} from './authRouter'
-
+import {userRouter} from './userRoute'
 export const router = Router()
 
 // Authenticate Middleware
@@ -13,3 +13,6 @@ router.use(middlewareAcl)
 
 // AuthRouter
 router.use('/auth', authRouter)
+
+// userRouter
+router.use('/users', userRouter)

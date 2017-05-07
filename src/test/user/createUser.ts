@@ -19,10 +19,15 @@ describe('create User API', function () {
       coordinates: [faker.address.longitude(), faker.address.latitude()]
     },
     dateBorn: faker.date.past(16),
-    password: faker.hacker.phrase(),
-    email: faker.internet.email()
+    cred: {
+      password: faker.hacker.phrase()
+    },
+    emails: [
+      {
+        email: faker.internet.email()
+      }
+    ]
   }
-
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
     .then(function ()  {
@@ -45,7 +50,7 @@ describe('create User API', function () {
   })
 
   it('contrast database', function (done) {
-    User.findOne({'emails.email': user.email}, function (err, userDB) {
+    User.findOne({'emails.email': user.emails[0].email}, function (err, userDB) {
       if (err) {
         return done(err)
       }
@@ -53,8 +58,7 @@ describe('create User API', function () {
         return done('user no found')
       }
       expect(userDB.name).to.be.equal(user.name)
-      expect(userDB.cred).to.be.equal(user.password)
-      expect(userDB.dateBorn).to.be.equal(user.dateBorn)
+      expect(userDB.dateBorn.toString()).to.be.equal(user.dateBorn.toString())
       done()
     })
   })

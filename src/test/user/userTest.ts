@@ -21,6 +21,7 @@ describe ('User Model', function () {
       name: faker.name.firstName(),
       username: faker.name.lastName(),
       number: faker.phone.phoneNumber(),
+      dateBorn: faker.date.future(),
       profileImgUrl: faker.image.imageUrl(),
       emails: [{email: faker.internet.email(), active: faker.random.boolean()}],
       role:  'user',
@@ -37,6 +38,7 @@ describe ('User Model', function () {
       expect(user.name).to.be.a('string')
       expect(user.username).to.be.a('string')
       expect(user.number).to.be.a('string')
+            expect(user.dateBorn).to.be.instanceOf(Date)
       expect(user.emails).to.be.instanceof(Array)
       expect(user.role).to.be.a('string')
       expect(user.cred.password).to.match(/\w{128}$/)
