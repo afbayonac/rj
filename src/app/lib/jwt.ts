@@ -27,11 +27,23 @@ export const decodeToken = (token: string) => {
   return decode(token, {complete: true})
 }
 
+/**
+ * @callback requestCallback
+ * @param {Error} error - null fail veryfy
+ * @param {object} decode
+ * @function verifyToken - verifica el token
+ * @param {requestCallback} cb - The callback that handles the response.
+ */
 export const verifyToken = (token: string, cb: Function) => {
     return verify(token, cfg.jwtSecret, cb)
 }
 
-export const refreshToken = (token: string): string => {
-    let decode = decodeToken(token)
-    return encodeToken(decode.payload)
+export const refreshToken = (token: string, cb: Function) => {
+    verifyToken(token, (err, decode) => {
+      if (err) {
+        cb(err)
+      }
+      cb(null, encodeToken(decode) )
+    }
+  )
 }

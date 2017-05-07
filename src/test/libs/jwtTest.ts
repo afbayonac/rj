@@ -43,19 +43,25 @@ describe('json web tokens Lib', function () {
   })
 
   it('refreshToken()', function (done) {
-    let decode = decodeToken(token)
-    setTimeout(() => {
-      let refreshtoken = refreshToken(token)
+    // el test se encarda de refrescar el test despues de un segundo para que
+    // que el token cambie
+    setTimeout( function () {
+    refreshToken(token, (err, refreshToken) => {
+      expect(err).to.be.equal(null)
+      expect(refreshToken)
+      .to
+      .match(/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/)
+      expect(refreshToken).to.be.not.equal(token)
       done()
-    }, 1000)
+    })}, 1000)
   })
 
-  it('refreshToken()', function (done) {
+  it('verifyToken()', function (done) {
     verifyToken(token,(err, decode) => {
       if (err) {
         return done('token verify fail')
       }
-      expect(decode).to.be.a('object')
+      expect(decode).to.have.all.keys('exp', 'iat', 'role', 'username')
       done()
     })
   })
