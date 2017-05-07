@@ -1,3 +1,4 @@
+import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
 import * as logger from 'morgan'
@@ -32,7 +33,9 @@ class App {
 
   // Configure Express middleware.
   private middleware (): void {
-    this.express.use(logger(cfg.logger))
+    this.express.use(logger(cfg.logger, {
+      stream:  fs.createWriteStream('./logs/access.log', {flags: 'a'})
+    }))
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({ extended: false }))
   }
