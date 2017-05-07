@@ -1,4 +1,4 @@
-import {encodeToken} from '../lib/jwt'
+import {stdResToken} from '../lib/jwt'
 import {Passport} from 'passport'
 import {Strategy as facebookStrategy} from 'passport-facebook'
 import {cfg} from '../cfg/cfg'
@@ -7,7 +7,7 @@ import {IUser} from '../models/IUser'
 
 export const authOwn = (req, res, next) => {
   if (!req.body.username || !req.body.password) {
-    return res.status(400).json({'mess': 'Bad Request'})
+    return res.status(400).json({'mess': 'bad Request'})
   }
   User
     .findOne({username: req.body.username})
@@ -16,17 +16,13 @@ export const authOwn = (req, res, next) => {
         return  res.status(500).json({'mess': 'server error'})
       }
       if (!user) {
-        return res.status(200).json({'mess': 'no user find'})
+        return res.status(200).json({'mess': 'user not  found'})
       }
 
       if (user.contrastPasword(req.body.password)) {
-        return res.status(200).json({
-          access_token: encodeToken(user),
-          token_type: 'Bearer',
-          expired_in: 3600
-        })
+        return res.status(200).json(stdResToken(user))
       } else {
-        return res.status(200).json({'mess': 'contraseñas no considen'})
+        return res.status(200).json({'mess': 'password not match'})
       }
   })
 }
@@ -61,7 +57,7 @@ passport.use(new facebookStrategy({
       throw(err)
     }
     if (user) {
-      return cb(null, encodeToken(user))
+      return cb(null, stdResToken(user))
     }
 
     let newUser = new User({facebookId: profile.id, role: 'client'})
@@ -90,16 +86,12 @@ passport.use(new facebookStrategy({
         throw(err)
       }
       // only send token to passportFacebookJWT
-      cb(null,encodeToken(user))
+      cb(null,stdResToken(user))
     })
   })
 }))
 
 export const passportFacebookJWT = (req, res, next) => {
-  console.log(req.user)
-  return  res.status(200).json({
-    access_token: req.user,
-    token_type: 'Bearer',
-    expired_in: 3600
-  })
+  // the req.user contain stanadad response Token
+  return  res.status(200).json(req.user)
 }

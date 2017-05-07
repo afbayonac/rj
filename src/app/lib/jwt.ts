@@ -14,6 +14,15 @@ export const encodeToken = (payload: IUser | IPayload): string => {
   }, cfg.jwtSecret, {expiresIn: 60 * 60})
 }
 
+// stanadar request Token
+export const stdResToken = (payload: IUser | IPayload) => {
+  return {
+    access_token: encodeToken(payload),
+    token_type: 'Bearer',
+    expired_in: 3600
+  }
+}
+
 export const decodeToken = (token: string) => {
   return decode(token, {complete: true})
 }
