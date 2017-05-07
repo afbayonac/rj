@@ -19,9 +19,9 @@ export interface IUser {
   dateBorn?: Date
   province?: string
   role: 'admin' | 'user'
-  locations?: ILocation[]
-  cred: {
-    password?: string,
+  locations?: ILocation
+  cred?: {
+    password: string,
     salt?: string
   },
   gender?: string

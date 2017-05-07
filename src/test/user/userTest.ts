@@ -1,10 +1,9 @@
 import 'mocha'
 import {User} from '../../app/models/user'
-import {IUser} from '../../app/models/IUser'
 import {expect, should, assert} from 'chai'
 import {cfg} from '../../app/cfg/cfg'
 import {connect, disconnect} from 'mongoose'
-import * as faker from 'faker'
+import {fkUser} from '../fakers'
 
 const db = cfg.mongodb
 
@@ -17,24 +16,12 @@ describe ('User Model', function () {
   })
 
   it('Encrypt Password',function (done) {
-    let usertest: IUser = {
-      name: faker.name.firstName(),
-      username: faker.name.lastName(),
-      number: faker.phone.phoneNumber(),
-      dateBorn: faker.date.future(),
-      profileImgUrl: faker.image.imageUrl(),
-      emails: [{email: faker.internet.email(), active: faker.random.boolean()}],
-      role:  'user',
-      cred: {
-        password: faker.internet.password()
-      }
-    }
-    new User(usertest)
+    new User(fkUser)
     .save((err, user) => {
       if (err) {
         return done(err)
       }
-      assert.isOk(user.contrastPasword(usertest.cred.password), 'fail encrypt')
+      assert.isOk(user.contrastPasword(fkUser.cred.password), 'fail encrypt')
       expect(user.name).to.be.a('string')
       expect(user.username).to.be.a('string')
       expect(user.number).to.be.a('string')
