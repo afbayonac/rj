@@ -19,7 +19,6 @@ export const authOwn = (req, res, next) => {
       if (!user) {
         return res.status(200).json({'mess': 'user not  found'})
       }
-
       if (user.contrastPasword(req.body.password)) {
         return res.status(200).json(stdResToken(user))
       } else {
@@ -45,20 +44,18 @@ passport.use(new facebookStrategy({
       return cb(null, stdResToken(user))
     }
 
-    let newUser = new User({facebookId: profile.id, role: 'client'})
+    let newUser = new User({
+      facebookId: profile.id,
+      role: 'user',
+      profileImgUrl: profile._json.picture.data.url,
+      // confirma si existe un Array para aplicar la funcion map
+      emails: profile.emails ? profile.emails.map((email) =>  Object({email: email.value, active: true })) : null
+    })
 
-    if (profile.emails) {
-      profile.emails.map((email) => {
-        newUser.emails.push({email: email.value, active: true})
-      })
-    }
     if (profile._json.location) {
       let location = profile._json.location.name.toLowerCase().split(', ')
       newUser.city = location[0]
       newUser.province = location[1]
-    }
-    if (!profile._json.picture.data.is_silhouette) {
-      newUser.profileImgUrl = profile._json.picture.data.url
     }
     newUser.name = [
       `${profile.name.givenName ? profile.name.givenName : ''} `,
@@ -68,7 +65,7 @@ passport.use(new facebookStrategy({
 
     newUser.save((err, user) => {
       if (err) {
-        throw(err)
+        cb(err)
       }
       // only send token to passportFacebookJWT
       cb(null,stdResToken(user))
