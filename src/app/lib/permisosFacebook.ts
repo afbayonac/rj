@@ -1,7 +1,7 @@
 export function permisosFacebook () {
    return [
     'public_profile',
-    // 'user_friends',
+  //   'user_friends',
     'email'
   //   'user_actions.books',
   //   'user_actions.fitness',
@@ -46,3 +46,19 @@ export function permisosFacebook () {
   //   'pages_messaging_phone_number'
    ]
 }
+// Filedes parsed by passport-facebook
+export const profileFields = [
+  'email',
+  'location',
+  'id',
+  'cover',
+  'name',
+  'age_range',
+  'link',
+  'gender',
+  'locale',
+  'picture',
+  'timezone',
+  'updated_time',
+  'verified'
+]

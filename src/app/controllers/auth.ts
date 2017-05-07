@@ -4,6 +4,7 @@ import {Strategy as facebookStrategy} from 'passport-facebook'
 import {cfg} from '../cfg/cfg'
 import {User} from '../models/user'
 import {IUser} from '../models/IUser'
+import {profileFields} from '../lib/permisosFacebook'
 
 export const authOwn = (req, res, next) => {
   if (!req.body.username || !req.body.password) {
@@ -28,22 +29,6 @@ export const authOwn = (req, res, next) => {
 }
 
 export const passport = new Passport()
-
-let profileFields =  [
-  'email',
-  'location',
-  'id',
-  'cover',
-  'name',
-  'age_range',
-  'link',
-  'gender',
-  'locale',
-  'picture',
-  'timezone',
-  'updated_time',
-  'verified'
-]
 
 passport.use(new facebookStrategy({
   clientID: cfg.facebook.key,
