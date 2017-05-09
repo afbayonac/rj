@@ -9,13 +9,17 @@ export interface IUserModel extends IUser, Document {
 
 export const UserSchema: Schema = new Schema({
   name: String,
-  username: String,
+  username: {type: String, unique: true},
   number: {type: String, unique: true},
   profileImgUrl: String,
   facebookId: {type: String, unique: true},
   emails: [{
     email: {type: String , unique : true},
-    active: {type: Boolean, default: false}
+    active: {type: Boolean, default: false},
+    verify: [{
+      code: String,
+      expiration: Date
+    }]
   }],
   gender: String,
   role: {
@@ -33,7 +37,8 @@ export const UserSchema: Schema = new Schema({
   },
   dateBorn: Date,
   city: String,
-  province: String
+  province: String,
+  active: {type: Boolean, default: false}
 })
 
 let encryptPassword = (password: string, salt: string): string => {

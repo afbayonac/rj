@@ -25,7 +25,7 @@ describe ('User Model', function () {
       expect(user.name).to.be.a('string')
       expect(user.username).to.be.a('string')
       expect(user.number).to.be.a('string')
-            expect(user.dateBorn).to.be.instanceOf(Date)
+      expect(user.dateBorn).to.be.instanceOf(Date)
       expect(user.emails).to.be.instanceof(Array)
       expect(user.role).to.be.a('string')
       expect(user.cred.password).to.match(/\w{128}$/)
