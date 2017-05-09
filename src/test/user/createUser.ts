@@ -10,7 +10,7 @@ const db = cfg.mongodb
 describe('create User API', function () {
   let api = supertest.agent(cfg.domain)
   let code = ''
-  let emailId = ''
+  let id = ''
 
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
@@ -47,7 +47,7 @@ describe('create User API', function () {
     })
   })
 
-  it('contrast database', function (done) {
+  it('contrast database new User', function (done) {
     User.findOne({'emails.email': fkUser.emails[0].email}, function (err, userDB) {
       if (err) {
         return done(err)
@@ -56,10 +56,8 @@ describe('create User API', function () {
         return done('user no found')
       }
       // antes de las prebas para guardar variables para los siguientes tests
-      console.log(userDB.emails[0].verify)
-      emailId = userDB.emails[0]._id
+      id = userDB.emails[0].verify[0]._id
       code = userDB.emails[0].verify[0].code
-
       expect(userDB.name).to.be.equal(fkUser.name)
       expect(userDB.dateBorn.toString()).to.be.equal(fkUser.dateBorn.toString())
       // se espera que todos los usuarios creados tengan el role de user
@@ -74,13 +72,27 @@ describe('create User API', function () {
 
   it('verify email', function (done) {
     api
-    .get(`/users/verify?email=${emailId}&&code=${code}`)
+    .get(`/users/verify?id=${id}&&code=${code}`)
     .end(function (err, res) {
       if (err) {
         done(err)
       }
       expect(res.status).to.be.equal(200,'status expect 200')
       expect(res.body).to.have.all.keys('mess')
+      done()
+    })
+  })
+
+  it('contrast database user verified', function (done) {
+    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, userDB) {
+      if (err) {
+        return done(err)
+      }
+      if (!userDB) {
+        return done('user no found')
+      }
+      expect(userDB.role).to.be.equal('user')
+      expect(userDB.active).to.be.equal(true)
       done()
     })
   })

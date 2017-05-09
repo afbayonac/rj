@@ -29,7 +29,7 @@ export const decodeToken = (token: string) => {
 
 /**
  * @callback requestCallback
- * @param {Error} error - null fail veryfy
+ * @param {Error} error - null fail verify
  * @param {object} decode
  * @function verifyToken - verifica el token
  * @param {requestCallback} cb - The callback that handles the response.
