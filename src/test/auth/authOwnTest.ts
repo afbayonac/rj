@@ -1,28 +1,17 @@
 import 'mocha'
 import {expect, assert} from 'chai'
-import * as supertest from 'supertest'
 import {cfg} from '../../app/cfg/cfg'
-import * as faker from 'faker'
 import {User} from '../../app/models/user'
-import {IUser} from '../../app/models/IUser'
+import {fkUser} from '../fakers'
 import {connect, disconnect} from 'mongoose'
+import * as supertest from 'supertest'
 
 const db = cfg.mongodb
 
 describe('authOwn', function () {
   let api = supertest.agent(cfg.domain)
   let token = ''
-  let user: IUser = {
-    name: faker.name.firstName(),
-    username: faker.name.lastName(),
-    number: faker.phone.phoneNumber(),
-    profileImgUrl: faker.image.imageUrl(),
-    emails: [{email: faker.internet.email(), active: faker.random.boolean()}],
-    role:  'user',
-    cred: {
-      password: faker.internet.password()
-    }
-  }
+
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
     .then(function ()  {
@@ -31,7 +20,7 @@ describe('authOwn', function () {
   })
 
   before(function (done) {
-    new User(user).save(done())
+    new User(fkUser).save(done())
   })
 
   it('authOwn API', function (done) {
@@ -39,8 +28,8 @@ describe('authOwn', function () {
     .post('/auth')
     .type('form')
     .send({
-      username: user.username,
-      password: user.cred.password
+      username: fkUser.username,
+      password: fkUser.cred.password
     })
     .set('Accept', 'application/json')
     .end(function (err, res) {

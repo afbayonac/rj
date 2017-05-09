@@ -7,6 +7,7 @@ export interface IPayload {
   username: string
 }
 
+// cofifica el token
 export const encodeToken = (payload: IUser | IPayload): string => {
   return sign({
       username : payload.username,
@@ -14,7 +15,12 @@ export const encodeToken = (payload: IUser | IPayload): string => {
   }, cfg.jwtSecret, {expiresIn: 60 * 60})
 }
 
-// stanadar request Token
+// decodifica el token
+export const decodeToken = (token: string) => {
+  return decode(token, {complete: true})
+}
+
+// retorna stanadar request Token https://tools.ietf.org/html/rfc6750#section-4
 export const stdResToken = (payload: IUser | IPayload) => {
   return {
     access_token: encodeToken(payload),
@@ -23,21 +29,12 @@ export const stdResToken = (payload: IUser | IPayload) => {
   }
 }
 
-export const decodeToken = (token: string) => {
-  return decode(token, {complete: true})
-}
-
-/**
- * @callback requestCallback
- * @param {Error} error - null fail verify
- * @param {object} decode
- * @function verifyToken - verifica el token
- * @param {requestCallback} cb - The callback that handles the response.
- */
+// verifica el token async
 export const verifyToken = (token: string, cb: Function) => {
     return verify(token, cfg.jwtSecret, cb)
 }
 
+// verifica el token async
 export const refreshToken = (token: string, cb: Function) => {
     verifyToken(token, (err, decode) => {
       if (err) {

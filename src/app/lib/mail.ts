@@ -1,4 +1,4 @@
-import {Transport, createTransport} from 'nodemailer'
+import {createTransport} from 'nodemailer'
 import {Types} from 'mongoose'
 import {IVerify} from '../models/IUser'
 import {randomBytes} from 'crypto'
@@ -35,15 +35,21 @@ export class Mailman {
       from: 'afbayonac@afbayonac.me',
       to: email,
       subject: 'RJ verify email',
-      text: 'Plaintext version of the message',
+      text: `
+        rj
+
+        Hola ${username}. Confirma tu correo con el siguiente enlace
+        ${cfg.domain}/users/verify?code=${code}&&id=${id}
+
+        Este mensaje ha genrado automaticamente por favor no responder
+      `,
       html: `
-      <h1> rj </h1>
-      <p>
-      Hola ${username}.
-      Confirma tu correo
-      <a href="${cfg.domain}/users/verify?code=${code}&&id=${id}">Aqui</a>
-      </p>
-      <p>Este mensaje ha genrado automaticamente por favor no responder.</p>
+        <h1> rj </h1>
+        <p>
+        Hola ${username}, Confirma tu correo
+        <a href="${cfg.domain}/users/verify?code=${code}&&id=${id}">Aqui</a>
+        </p>
+        <p>Este mensaje ha genrado automaticamente por favor no responder.</p>
       `
     })
     return {

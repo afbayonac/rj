@@ -46,14 +46,15 @@ class App {
     this.express.use('/', router)
   }
 
+  // config errorHandler use prettyError
   private errorHandler (pe: prettyError): void {
-
     this.express.use(function (err, req, res, next) {
       console.log(pe.render(err))
       next()
     })
   }
 
+  // connect to data base
   private connectDatabase () {
     let db = cfg.mongodb
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)

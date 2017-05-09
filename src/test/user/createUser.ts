@@ -48,24 +48,24 @@ describe('create User API', function () {
   })
 
   it('contrast database new User', function (done) {
-    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, userDB) {
+    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, user) {
       if (err) {
         return done(err)
       }
-      if (!userDB) {
+      if (!user) {
         return done('user no found')
       }
       // antes de las prebas para guardar variables para los siguientes tests
-      id = userDB.emails[0].verify[0]._id
-      code = userDB.emails[0].verify[0].code
-      expect(userDB.name).to.be.equal(fkUser.name)
-      expect(userDB.dateBorn.toString()).to.be.equal(fkUser.dateBorn.toString())
+      id = user.emails[0].verify[0]._id
+      code = user.emails[0].verify[0].code
+      expect(user.name).to.be.equal(fkUser.name)
+      expect(user.dateBorn.toString()).to.be.equal(fkUser.dateBorn.toString())
       // se espera que todos los usuarios creados tengan el role de user
-      expect(userDB.role).to.be.equal('user')
-      expect(userDB.emails[0].active).to.be.equal(false)
-      expect(userDB.emails[0].verify[0].expiration).to.be.instanceOf(Date)
-      expect(userDB.emails[0].verify[0].code).to.be.a('string')
-      expect(userDB.active).to.be.equal(false)
+      expect(user.role).to.be.equal('user')
+      expect(user.emails[0].active).to.be.equal(false)
+      expect(user.emails[0].verify[0].expiration).to.be.instanceOf(Date)
+      expect(user.emails[0].verify[0].code).to.be.a('string')
+      expect(user.active).to.be.equal(false)
       done()
     })
   })
@@ -84,15 +84,15 @@ describe('create User API', function () {
   })
 
   it('contrast database user verified', function (done) {
-    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, userDB) {
+    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, user) {
       if (err) {
         return done(err)
       }
-      if (!userDB) {
+      if (!user) {
         return done('user no found')
       }
-      expect(userDB.role).to.be.equal('user')
-      expect(userDB.active).to.be.equal(true)
+      expect(user.role).to.be.equal('user')
+      expect(user.active).to.be.equal(true)
       done()
     })
   })
