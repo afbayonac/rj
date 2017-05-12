@@ -11,7 +11,7 @@ describe('create User API', function () {
   let api = supertest.agent(cfg.domain)
   let code = ''
   let id = ''
-
+  let user = fkUser()
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
     .then(function ()  {
@@ -22,7 +22,7 @@ describe('create User API', function () {
   it('create user', function (done) {
     api
     .post('/users')
-    .send(fkUser)
+    .send(user)
     .end(function (err, res) {
       if (err) {
         done(err)
@@ -36,7 +36,7 @@ describe('create User API', function () {
   it('fail create user', function (done) {
     api
     .post('/users')
-    .send(fkUser)
+    .send(user)
     .end(function (err, res) {
       if (err) {
         done(err)
@@ -48,24 +48,24 @@ describe('create User API', function () {
   })
 
   it('contrast database new User', function (done) {
-    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, user) {
+    User.findOne({'emails.email': user.emails[0].email}, function (err, userdb) {
       if (err) {
         return done(err)
       }
-      if (!user) {
+      if (!userdb) {
         return done('user no found')
       }
       // antes de las prebas para guardar variables para los siguientes tests
-      id = user.emails[0].verify[0]._id
-      code = user.emails[0].verify[0].code
-      expect(user.name).to.be.equal(fkUser.name)
-      expect(user.dateBorn.toString()).to.be.equal(fkUser.dateBorn.toString())
+      id = userdb.emails[0].verify[0]._id
+      code = userdb.emails[0].verify[0].code
+      expect(userdb.name).to.be.equal(user.name)
+      expect(userdb.dateBorn.toString()).to.be.equal(user.dateBorn.toString())
       // se espera que todos los usuarios creados tengan el role de user
-      expect(user.role).to.be.equal('user')
-      expect(user.emails[0].active).to.be.equal(false)
-      expect(user.emails[0].verify[0].expiration).to.be.instanceOf(Date)
-      expect(user.emails[0].verify[0].code).to.be.a('string')
-      expect(user.active).to.be.equal(false)
+      expect(userdb.role).to.be.equal('user')
+      expect(userdb.emails[0].active).to.be.equal(false)
+      expect(userdb.emails[0].verify[0].expiration).to.be.instanceOf(Date)
+      expect(userdb.emails[0].verify[0].code).to.be.a('string')
+      expect(userdb.active).to.be.equal(false)
       done()
     })
   })
@@ -84,7 +84,7 @@ describe('create User API', function () {
   })
 
   it('contrast database user verified', function (done) {
-    User.findOne({'emails.email': fkUser.emails[0].email}, function (err, user) {
+    User.findOne({'emails.email': user.emails[0].email}, function (err, user) {
       if (err) {
         return done(err)
       }

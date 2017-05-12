@@ -15,9 +15,9 @@ import {
 describe('json web tokens Lib', function () {
   let reToken = /[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/
   let token = ''
-
+  let user = fkUser()
   it('encode Token', function (done) {
-    token = encodeToken(fkUser)
+    token = encodeToken(user)
     expect(token).to.match(reToken)
     done()
   })
@@ -52,7 +52,7 @@ describe('json web tokens Lib', function () {
   })
 
   it('stanadard response Toker', function (done) {
-    let stanadard = stdResToken(fkUser)
+    let stanadard = stdResToken(user)
     expect(stanadard).to.have.all.keys('access_token', 'token_type', 'expired_in')
     done()
   })

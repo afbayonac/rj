@@ -8,6 +8,7 @@ import {fkUser} from '../fakers'
 const db = cfg.mongodb
 
 describe ('User Model', function () {
+  let user = fkUser()
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
     .then(function ()  {
@@ -16,20 +17,20 @@ describe ('User Model', function () {
   })
 
   it('Encrypt Password',function (done) {
-    new User(fkUser)
-    .save((err, user) => {
+    new User(user)
+    .save((err, userdb) => {
       if (err) {
         return done(err)
       }
-      assert.isOk(user.contrastPasword(fkUser.cred.password), 'fail encrypt')
-      expect(user.name).to.be.a('string')
-      expect(user.username).to.be.a('string')
-      expect(user.number).to.be.a('string')
-      expect(user.dateBorn).to.be.instanceOf(Date)
-      expect(user.emails).to.be.instanceof(Array)
-      expect(user.role).to.be.a('string')
-      expect(user.cred.password).to.match(/\w{128}$/)
-      expect(user.cred.salt).to.match(/\w{16}$/)
+      assert.isOk(userdb.contrastPasword(user.cred.password), 'fail encrypt')
+      expect(userdb.name).to.be.a('string')
+      expect(userdb.username).to.be.a('string')
+      expect(userdb.number).to.be.a('string')
+      expect(userdb.dateBorn).to.be.instanceOf(Date)
+      expect(userdb.emails).to.be.instanceof(Array)
+      expect(userdb.role).to.be.a('string')
+      expect(userdb.cred.password).to.match(/\w{128}$/)
+      expect(userdb.cred.salt).to.match(/\w{16}$/)
       done()
     })
   })

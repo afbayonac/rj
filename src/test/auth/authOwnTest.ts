@@ -11,6 +11,7 @@ const db = cfg.mongodb
 describe('authOwn', function () {
   let api = supertest.agent(cfg.domain)
   let token = ''
+  let user = fkUser()
 
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
@@ -20,7 +21,7 @@ describe('authOwn', function () {
   })
 
   before(function (done) {
-    new User(fkUser).save(done())
+    new User(user).save(done())
   })
 
   it('authOwn API', function (done) {
@@ -28,8 +29,8 @@ describe('authOwn', function () {
     .post('/auth')
     .type('form')
     .send({
-      username: fkUser.username,
-      password: fkUser.cred.password
+      username: user.username,
+      password: user.cred.password
     })
     .set('Accept', 'application/json')
     .end(function (err, res) {

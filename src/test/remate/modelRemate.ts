@@ -8,6 +8,7 @@ import {fkRemate} from '../fakers'
 const db = cfg.mongodb
 
 describe ('Remate Model', function () {
+  let remate = fkRemate()
 
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
@@ -17,14 +18,14 @@ describe ('Remate Model', function () {
   })
 
   it('Generate hash',function (done) {
-    new Remate(fkRemate)
-    .save((err, remate) => {
+    new Remate(remate)
+    .save((err, rematedb) => {
       if (err) {
         return done(err)
       }
-      expect(remate.rawid).to.be.a('string')
-      expect(remate.raw).to.be.a('string')
-      expect(remate.item[0].location.coordinates[1]).to.be.a('number')
+      expect(rematedb.rawid).to.be.a('string')
+      expect(rematedb.raw).to.be.a('string')
+      expect(rematedb.item[0].location.coordinates[1]).to.be.a('number')
       done()
     })
   })
