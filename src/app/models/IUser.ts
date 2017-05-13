@@ -30,7 +30,7 @@ export interface IUser {
   dateBorn?: Date
   province?: string
   role: 'admin' | 'user' | 'scraper'
-  locations?: ILocation
+  location?: ILocation
   cred?: {
     password: string,
     salt?: string

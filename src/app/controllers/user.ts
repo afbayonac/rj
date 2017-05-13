@@ -37,7 +37,7 @@ export const createUser = (req, res, next) => {
         city: newUser.city,
         dateBorn: newUser.dateBorn,
         province: newUser.province,
-        location: newUser.locations,
+        location: newUser.location,
         cred: {
           password: newUser.cred.password
         }
@@ -87,5 +87,25 @@ export const verifyEmail = (req, res, next) => {
     })
   },(err) => {
     return  res.status(500).json({'mess': 'server error'})
+  })
+}
+
+export const updateUser = (req, res, next) => {
+  let attrs = req.body
+  User.findOne({'_id': req.params.idusers}).then((user) => {
+    if (!user) {
+      return res.status(400).json({'mess': 'user no found'})
+    }
+    user.dateBorn = attrs.dateBorn ? attrs.dateBorn : user.dateBorn
+    user.city = attrs.city ? attrs.city : user.city
+    user.name = attrs.name ? attrs.name : user.name
+    user.province = attrs.province ? attrs.province : user.province
+    user.location = attrs.location ? attrs.location : user.location
+    user.save((err) => {
+      if (err) {
+        return  res.status(500).json({'mess': 'server error'})
+      }
+      return res.status(200).json({'mess': 'user updated'})
+    })
   })
 }

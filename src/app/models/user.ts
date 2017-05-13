@@ -29,7 +29,7 @@ export const UserSchema: Schema = new Schema({
     enum: ['user', 'admin', 'scraper']
   },
   location: {
-      type: {type: String},
+      type: {type: String, enum: ['Point']},
       coordinates: [Number]
   },
   cred: {

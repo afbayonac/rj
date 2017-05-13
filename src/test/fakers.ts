@@ -12,7 +12,7 @@ export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
     username: faker.name.title(),
     city: faker.address.city(),
     province: faker.address.city(),
-    locations: {
+    location: {
       type: 'Point',
       coordinates: [+faker.address.longitude(), +faker.address.latitude()]
     },

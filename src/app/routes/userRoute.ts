@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {createUser, verifyEmail} from '../controllers/user'
+import {createUser, verifyEmail, updateUser} from '../controllers/user'
 
 export const userRouter = Router()
 
@@ -8,3 +8,6 @@ userRouter.post('/', createUser)
 
 // verify email
 userRouter.get('/verify', verifyEmail)
+
+// update user
+userRouter.post('/:idusers', updateUser)

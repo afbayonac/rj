@@ -62,7 +62,12 @@ describe('Update User API', function () {
       expect(userdb.province).to.be.equal(userUpdate.province)
       expect(userdb.city).to.be.equal(userUpdate.city)
       expect(userdb.gender).to.be.equal(userUpdate.gender)
-      expect(userdb.locations).to.be.equal(userUpdate.locations)
+      // check location
+      let l = userdb.location
+      let ul = userUpdate.location
+      expect(l.type).to.be.eql(ul.type)
+      expect(l.coordinates[0]).to.be.eql(ul.coordinates[0])
+      expect(l.coordinates[1]).to.be.eql(ul.coordinates[1])
       expect(userdb.role).to.be.equal('user')
       expect(userdb.active).to.be.equal(true)
       done()
