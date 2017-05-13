@@ -52,7 +52,7 @@ export const updateRemate = (req, res, next) => {
       if (err) {
         return  res.status(500).json({'mess': 'server error'})
       }
-      return res.status(200).json({'mess': 'user updated'})
+      return res.status(200).json({'mess': 'remate updated'})
     })
   }, (err) => {
     return  res.status(500).json({'mess': 'server error'})

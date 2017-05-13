@@ -1,10 +1,10 @@
-import 'mocha'
-import {expect, assert} from 'chai'
+import {fkUser} from '../fakers'
 import {cfg} from '../../app/cfg/cfg'
 import {User} from '../../app/models/user'
-import {fkUser} from '../fakers'
-import {connect, disconnect} from 'mongoose'
+
+import {expect, assert} from 'chai'
 import * as supertest from 'supertest'
+import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 
@@ -33,11 +33,11 @@ describe('authOwn', function () {
       password: user.cred.password
     })
     .set('Accept', 'application/json')
+    .expect(200)
     .end(function (err, res) {
       if (err) {
         done(err)
       }
-      expect(res.status).to.equal(200, 'no status expect')
       assert.equal(res.body.token_type, 'Bearer', 'Fail type token')
       expect(res.body.expired_in).to.be.a('number')
       expect(res.body.access_token).to.be.a('string')
@@ -52,19 +52,13 @@ describe('authOwn', function () {
     api
     .get('/')
     .set('Authorization', `Bearer ${token}`)
-    .end(function (err, res) {
-      expect(res.status).to.equal(404)
-      done()
-    })
+    .expect(404,done)
   })
 
   it ('request without token', function (done) {
     api
     .get('/')
-    .end(function (err, res) {
-      expect(res.status).to.equal(403)
-      done()
-    })
+    .expect(403,done)
   })
 
   after(function (done) {

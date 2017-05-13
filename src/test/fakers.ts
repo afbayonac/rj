@@ -1,7 +1,8 @@
-import * as faker from 'faker'
-import {IUser} from '../app/models/IUser'
-import {IRemate} from '../app/models/IRemate'
 import {Types} from 'mongoose'
+import {IUser} from '../app/models/IUser'
+import {IRemate, IItem, IPerson} from '../app/models/IRemate'
+
+import * as faker from 'faker'
 
 export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
   return {
@@ -23,42 +24,37 @@ export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
   }
 }
 
-export const fkRemate = (): IRemate => {
+export const fkItems = (n: number = 1): IItem[] => {
+  return  Array.from({length: n}, (v, k) => {
+    return {
+      name: faker.commerce.product(),
+      address: faker.address.streetAddress(),
+      location: {
+        type: 'Point',
+        coordinates: [+faker.address.latitude(), +faker.address.longitude()]
+      },
+      base: faker.finance.amount().toString(),
+      avaluo: faker.finance.amount().toString()
+    }
+  })
+}
+
+export const fkPersons = (n: number = 1): IPerson[] => {
+  return  Array.from({length: n}, (v, k) => {
+    return {
+      name: faker.name.findName(),
+      cc: '1095.935.974'
+    }
+  })
+}
+
+export const fkRemate = (items: number = 2, demandantes: number = 2, demandados: number = 2 ): IRemate => {
+
   return {
     _id: Types.ObjectId().toHexString(),
-    items: [{
-      name: faker.commerce.product(),
-      address: faker.address.streetAddress(),
-      location: {
-        type: 'Point',
-        coordinates: [+faker.address.latitude(), +faker.address.longitude()]
-      },
-      base: faker.finance.amount().toString(),
-      avaluo: faker.finance.amount().toString()
-    },{
-      name: faker.commerce.product(),
-      address: faker.address.streetAddress(),
-      location: {
-        type: 'Point',
-        coordinates: [+faker.address.latitude(), +faker.address.longitude()]
-      },
-      base: faker.finance.amount().toString(),
-      avaluo: faker.finance.amount().toString()
-    }],
-    demandantes: [{
-      name: faker.name.findName(),
-      cc: '1095.935.974'
-    },{
-      name: faker.name.findName(),
-      cc: '1095.935.974'
-    }],
-    demandados: [{
-      name: faker.name.findName(),
-      cc: '1095.935.974'
-    },{
-      name: faker.name.findName(),
-      cc: '1095.935.974'
-    }],
+    items: fkItems(items),
+    demandantes: fkPersons(demandantes),
+    demandados: fkPersons(demandados),
     juzgado: faker.lorem.lines(),
     proceso: faker.lorem.words(5),
     fechaLicitacion: faker.date.recent(30),

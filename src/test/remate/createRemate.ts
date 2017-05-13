@@ -1,12 +1,12 @@
-import 'mocha'
-import {expect} from 'chai'
-import {User} from '../../app/models/user'
-import {Remate, generateRawId} from '../../app/models/remate'
-import {encodeToken} from '../../app/lib/jwt'
 import {cfg} from '../../app/cfg/cfg'
+import {User} from '../../app/models/user'
+import {encodeToken} from '../../app/lib/jwt'
+import {Remate, generateRawId} from '../../app/models/remate'
+
+import {expect} from 'chai'
 import * as supertest from 'supertest'
-import {connect, disconnect} from 'mongoose'
 import {fkUser, fkRemate} from '../fakers'
+import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('create Remate API', function () {
@@ -44,11 +44,9 @@ describe('create Remate API', function () {
     .post(`/remates`)
     .set('Authorization', `Bearer ${token}`)
     .send(remate)
-    .end(function (err, res) {
-      expect(res.status).to.be.equal(200,'status expect 200')
-      expect(res.body).to.have.all.keys('mess')
-      done()
-    })
+    .expect(200, {
+      mess: 'remate created'
+    }, done)
   })
 
   it('constrast database', function (done) {

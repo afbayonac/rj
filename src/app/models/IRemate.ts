@@ -7,7 +7,7 @@ export interface IItem {
 }
 
 export interface ILocation {
-  type: 'Point'
+  type: string
   coordinates: number[] | number[][]
 }
 

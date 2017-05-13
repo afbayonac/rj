@@ -1,10 +1,10 @@
-import 'mocha'
-import {expect} from 'chai'
-import {User} from '../../app/models/user'
 import {cfg} from '../../app/cfg/cfg'
-import * as supertest from 'supertest'
-import {connect, disconnect} from 'mongoose'
+import {User} from '../../app/models/user'
+
 import {fkUser} from '../fakers'
+import * as supertest from 'supertest'
+import {expect, should, assert} from 'chai'
+import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('create User API', function () {
@@ -37,14 +37,9 @@ describe('create User API', function () {
     api
     .post('/users')
     .send(user)
-    .end(function (err, res) {
-      if (err) {
-        done(err)
-      }
-      expect(res.status).to.be.equal(400,'status expect 400')
-      expect(res.body).to.have.all.keys('mess')
-      done()
-    })
+    .expect(400,{
+      mess: 'username or email registered'
+    },done)
   })
 
   it('contrast database new User', function (done) {
@@ -79,14 +74,9 @@ describe('create User API', function () {
   it('verify email', function (done) {
     api
     .get(`/users/verify?id=${id}&&code=${code}`)
-    .end(function (err, res) {
-      if (err) {
-        done(err)
-      }
-      expect(res.status).to.be.equal(200,'status expect 200')
-      expect(res.body).to.have.all.keys('mess')
-      done()
-    })
+    .expect(200,{
+      mess: 'user actived'
+    },done)
   })
 
   it('contrast database user verified', function (done) {

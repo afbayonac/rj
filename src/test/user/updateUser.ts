@@ -1,12 +1,12 @@
-import 'mocha'
-import {expect} from 'chai'
+import {cfg} from '../../app/cfg/cfg'
 import {User} from '../../app/models/user'
 import {Remate} from '../../app/models/remate'
 import {encodeToken} from '../../app/lib/jwt'
-import {cfg} from '../../app/cfg/cfg'
+
+import {expect} from 'chai'
 import * as supertest from 'supertest'
-import {connect, disconnect, Types} from 'mongoose'
 import {fkUser, fkRemate} from '../fakers'
+import {connect, disconnect, Types} from 'mongoose'
 
 const db = cfg.mongodb
 describe('Update User API', function () {
@@ -42,11 +42,9 @@ describe('Update User API', function () {
     .post(`/users/${id}`)
     .set('Authorization', `Bearer ${token}`)
     .send(userUpdate)
-    .end(function (err, res) {
-      expect(res.status).to.be.equal(200,'status expect 200')
-      expect(res.body).to.have.all.keys('mess')
-      done()
-    })
+    .expect(200, {
+      mess: 'user updated'
+    },done)
   })
 
   it('constrast database', function (done) {

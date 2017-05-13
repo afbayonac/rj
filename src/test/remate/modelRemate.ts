@@ -1,9 +1,9 @@
-import 'mocha'
-import {Remate} from '../../app/models/remate'
-import {expect, should, assert} from 'chai'
 import {cfg} from '../../app/cfg/cfg'
-import {connect, disconnect} from 'mongoose'
+import {Remate} from '../../app/models/remate'
+
 import {fkRemate} from '../fakers'
+import {expect, should, assert} from 'chai'
+import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 

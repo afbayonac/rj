@@ -1,9 +1,9 @@
-import 'mocha'
-import {User} from '../../app/models/user'
-import {expect, should, assert} from 'chai'
 import {cfg} from '../../app/cfg/cfg'
-import {connect, disconnect} from 'mongoose'
+import {User} from '../../app/models/user'
+
 import {fkUser} from '../fakers'
+import {expect, should, assert} from 'chai'
+import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 

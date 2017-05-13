@@ -1,5 +1,5 @@
-import 'mocha'
 import {expect, should, assert} from 'chai'
+
 import {cfg} from '../../app/cfg/cfg'
 import {fkUser} from '../fakers'
 

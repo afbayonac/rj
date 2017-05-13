@@ -1,12 +1,12 @@
-import 'mocha'
-import {expect} from 'chai'
-import {User} from '../../app/models/user'
-import {Remate} from '../../app/models/remate'
-import {encodeToken} from '../../app/lib/jwt'
 import {cfg} from '../../app/cfg/cfg'
+import {User} from '../../app/models/user'
+import {encodeToken} from '../../app/lib/jwt'
+import {Remate} from '../../app/models/remate'
+
+import {expect} from 'chai'
 import * as supertest from 'supertest'
-import {connect, disconnect} from 'mongoose'
 import {fkUser, fkRemate} from '../fakers'
+import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('Update Remate API', function () {
@@ -16,6 +16,7 @@ describe('Update Remate API', function () {
   let remate = fkRemate()
   let remateUpdate = fkRemate()
   let user = fkUser()
+
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
     .then(done, done)
@@ -56,11 +57,9 @@ describe('Update Remate API', function () {
     .post(`/remates/${remate._id}`)
     .set('Authorization', `Bearer ${token}`)
     .send(remateUpdate)
-    .end(function (err, res) {
-      expect(res.status).to.be.equal(200,'status expect 200')
-      expect(res.body).to.have.all.keys('mess')
-      done()
-    })
+    .expect(200,{
+      mess: 'remate updated'
+    },done)
   })
 
   it('constrast database', function (done) {
