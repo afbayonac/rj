@@ -11,7 +11,9 @@ acl.allow(aclist)
 acl.addUserRoles('guest',['guest'])
 acl.addUserRoles('admin',['admin'])
 acl.addUserRoles('user',['user'])
-acl.addRoleParents('admin',['user','guest'])
+acl.addUserRoles('scraper',['scraper'])
+acl.addRoleParents('scraper',['user'])
+acl.addRoleParents('admin',['scraper','guest'])
 
 const re = new RegExp(/^[0-9a-fA-F]{24}$/)
 

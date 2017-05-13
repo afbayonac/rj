@@ -17,6 +17,7 @@ export interface IPerson {
 }
 
 export interface IRemate {
+  _id: string
   item?: IItem[]
   demandante?: IPerson[]
   demandado?: IPerson[]

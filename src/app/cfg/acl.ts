@@ -15,6 +15,12 @@ export const aclist = [
       {resources: '/', permissions: ['GET']},
       {resources: '/users/:idusers', permissions: ['POST']}
     ]
+  },{
+    roles: 'scraper',
+    allows: [
+      {resources: '/remates', permissions: ['POST']},
+      {resources: '/remates/:idremates', permissions: ['POST']}
+    ]
   }, {
     roles: 'admin',
     allows: []

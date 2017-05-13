@@ -107,5 +107,7 @@ export const updateUser = (req, res, next) => {
       }
       return res.status(200).json({'mess': 'user updated'})
     })
+  }, (err) => {
+    return  res.status(500).json({'mess': 'server error'})
   })
 }

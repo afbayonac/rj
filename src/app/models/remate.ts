@@ -3,6 +3,7 @@ import {IRemate} from './IRemate'
 import {createHash } from 'crypto'
 
 export interface IRenateModel extends IRemate, Document {
+  _id: string
   generateRawId (raw: string): string
 }
 
