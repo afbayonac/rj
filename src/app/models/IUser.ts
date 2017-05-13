@@ -1,4 +1,5 @@
 // pueden realizar una corfirmacion adicional si expira la primera
+import {Types} from 'mongoose'
 export interface IVerify {
   code: string
   expiration: Date
@@ -18,6 +19,7 @@ export interface ILocation {
 }
 
 export interface IUser {
+  _id: string
   name?: string
   username: string
   number?: string // numero de telefono puede ser un identificador unico

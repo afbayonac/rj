@@ -16,6 +16,7 @@ describe('json web tokens Lib', function () {
   let reToken = /[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/
   let token = ''
   let user = fkUser()
+
   it('encode Token', function (done) {
     token = encodeToken(user)
     expect(token).to.match(reToken)
@@ -46,7 +47,7 @@ describe('json web tokens Lib', function () {
       if (err) {
         return done('token verify fail')
       }
-      expect(decode).to.have.all.keys('exp', 'iat', 'role', 'username')
+      expect(decode).to.have.all.keys('_id', 'exp', 'iat', 'role', 'username')
       done()
     })
   })

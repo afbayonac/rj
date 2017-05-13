@@ -3,6 +3,7 @@ import {IUser} from '../models/IUser'
 import {cfg} from '../cfg/cfg'
 
 export interface IPayload {
+  _id: string
   role: string
   username: string
 }
@@ -11,6 +12,7 @@ export interface IPayload {
 export const encodeToken = (payload: IUser | IPayload): string => {
   return sign({
       username : payload.username,
+      _id: payload._id,
       role: payload.role
   }, cfg.jwtSecret, {expiresIn: 60 * 60})
 }

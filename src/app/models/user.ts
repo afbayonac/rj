@@ -3,6 +3,7 @@ import {IUser} from './IUser'
 import {createHmac, randomBytes } from 'crypto'
 
 export interface IUserModel extends IUser, Document {
+  _id: string
   encryptPassword (password: string, salt: string): string
   getRandomSalt (password: string, salt: string): string
 }

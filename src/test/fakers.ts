@@ -1,9 +1,11 @@
 import * as faker from 'faker'
 import {IUser} from '../app/models/IUser'
 import {IRemate} from '../app/models/IRemate'
+import {Types} from 'mongoose'
 
 export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
   return {
+    _id: Types.ObjectId().toHexString(),
     name: `${faker.name.firstName()}  ${faker.name.lastName()}`,
     emails: [{ email: faker.internet.email(), active: true }],
     number: faker.phone.phoneNumber(),

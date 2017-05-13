@@ -12,7 +12,11 @@ export const aclist = [
   {
     roles: 'user',
     allows: [
-      {resources: '/', permissions: ['GET']}
+      {resources: '/', permissions: ['GET']},
+      {resources: '/users/:idusers', permissions: ['POST']}
     ]
+  }, {
+    roles: 'admin',
+    allows: []
   }
 ]

@@ -19,6 +19,9 @@ export const authOwn = (req, res, next) => {
       if (!user) {
         return res.status(200).json({'mess': 'user not  found'})
       }
+      if (!user.active) {
+       return res.status(200).json({'mess': 'user not  actived'})
+      }
       if (user.contrastPasword(req.body.password)) {
         return res.status(200).json(stdResToken(user))
       } else {
