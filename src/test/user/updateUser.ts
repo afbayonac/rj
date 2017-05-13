@@ -50,7 +50,7 @@ describe('Update User API', function () {
   })
 
   it('constrast database', function (done) {
-    User.findOne({'emails.email': user.emails[0].email}, function (err, userdb) {
+    User.findOne({'_id': user._id}, function (err, userdb) {
       if (err) {
         return done(err)
       }

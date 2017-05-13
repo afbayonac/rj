@@ -25,7 +25,17 @@ export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
 
 export const fkRemate = (): IRemate => {
   return {
+    _id: Types.ObjectId().toHexString(),
     item: [{
+      name: faker.commerce.product(),
+      address: faker.address.streetAddress(),
+      location: {
+        type: 'Point',
+        coordinates: [+faker.address.latitude(), +faker.address.longitude()]
+      },
+      base: faker.finance.amount().toString(),
+      avaluo: faker.finance.amount().toString()
+    },{
       name: faker.commerce.product(),
       address: faker.address.streetAddress(),
       location: {
@@ -38,8 +48,14 @@ export const fkRemate = (): IRemate => {
     demandante: [{
       name: faker.name.findName(),
       cc: '1095.935.974'
+    },{
+      name: faker.name.findName(),
+      cc: '1095.935.974'
     }],
     demandado: [{
+      name: faker.name.findName(),
+      cc: '1095.935.974'
+    },{
       name: faker.name.findName(),
       cc: '1095.935.974'
     }],
