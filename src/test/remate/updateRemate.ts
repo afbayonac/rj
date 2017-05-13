@@ -75,34 +75,34 @@ describe('Update Remate API', function () {
       expect(rematedb.fuente).to.be.not.equal(remateUpdate.fuente)
       expect(rematedb.fechaLicitacion.toString()).to.be.equal(remateUpdate.fechaLicitacion.toString())
       // check demandantes
-      expect(rematedb.demandante[0].name).to.be.equal(remateUpdate.demandante[0].name)
-      expect(rematedb.demandante[0].cc).to.be.equal(remateUpdate.demandante[0].cc)
-      expect(rematedb.demandante[1].name).to.be.equal(remateUpdate.demandante[1].name)
-      expect(rematedb.demandante[1].cc).to.be.equal(remateUpdate.demandante[1].cc)
+      expect(rematedb.demandantes[0].name).to.be.equal(remateUpdate.demandantes[0].name)
+      expect(rematedb.demandantes[0].cc).to.be.equal(remateUpdate.demandantes[0].cc)
+      expect(rematedb.demandantes[1].name).to.be.equal(remateUpdate.demandantes[1].name)
+      expect(rematedb.demandantes[1].cc).to.be.equal(remateUpdate.demandantes[1].cc)
       // check demandandos
-      expect(rematedb.demandado[0].name).to.be.equal(remateUpdate.demandado[0].name)
-      expect(rematedb.demandado[0].cc).to.be.equal(remateUpdate.demandado[0].cc)
-      expect(rematedb.demandado[0].name).to.be.equal(remateUpdate.demandado[0].name)
-      expect(rematedb.demandado[0].cc).to.be.equal(remateUpdate.demandado[0].cc)
+      expect(rematedb.demandados[0].name).to.be.equal(remateUpdate.demandados[0].name)
+      expect(rematedb.demandados[0].cc).to.be.equal(remateUpdate.demandados[0].cc)
+      expect(rematedb.demandados[0].name).to.be.equal(remateUpdate.demandados[0].name)
+      expect(rematedb.demandados[0].cc).to.be.equal(remateUpdate.demandados[0].cc)
       // check item 1
-      expect(rematedb.item[0].name).to.be.equal(remateUpdate.item[0].name)
-      expect(rematedb.item[0].address).to.be.equal(remateUpdate.item[0].address)
-      expect(rematedb.item[0].base).to.be.equal(remateUpdate.item[0].base)
-      expect(rematedb.item[0].base).to.be.equal(remate.item[0].base)
+      expect(rematedb.items[0].name).to.be.equal(remateUpdate.items[0].name)
+      expect(rematedb.items[0].address).to.be.equal(remateUpdate.items[0].address)
+      expect(rematedb.items[0].base).to.be.equal(remateUpdate.items[0].base)
+      expect(rematedb.items[0].base).to.be.equal(remateUpdate.items[0].base)
       // check location item 1
-      let ldb = rematedb.item[0].location
-      let l = remateUpdate.item[0].location
+      let ldb = rematedb.items[0].location
+      let l = remateUpdate.items[0].location
       expect(ldb.type).to.be.eql(l.type)
       expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
       expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
       // check item 2
-      expect(rematedb.item[1].name).to.be.equal(remateUpdate.item[1].name)
-      expect(rematedb.item[1].address).to.be.equal(remateUpdate.item[1].address)
-      expect(rematedb.item[1].base).to.be.equal(remateUpdate.item[1].base)
-      expect(rematedb.item[1].base).to.be.equal(remateUpdate.item[1].base)
+      expect(rematedb.items[1].name).to.be.equal(remateUpdate.items[1].name)
+      expect(rematedb.items[1].address).to.be.equal(remateUpdate.items[1].address)
+      expect(rematedb.items[1].base).to.be.equal(remateUpdate.items[1].base)
+      expect(rematedb.items[1].base).to.be.equal(remateUpdate.items[1].base)
       // check location item 2
-      ldb = rematedb.item[1].location
-      l = remateUpdate.item[1].location
+      ldb = rematedb.items[1].location
+      l = remateUpdate.items[1].location
       expect(ldb.type).to.be.eql(l.type)
       expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
       expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])

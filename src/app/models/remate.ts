@@ -2,13 +2,13 @@ import {Document, Schema, Model, model} from 'mongoose'
 import {IRemate} from './IRemate'
 import {createHash } from 'crypto'
 
-export interface IRenateModel extends IRemate, Document {
+export interface IRemateModel extends IRemate, Document {
   _id: string
   generateRawId (raw: string): string
 }
 
 export const UserSchema: Schema = new Schema({
-  item: [{
+  items: [{
     name: String,
     location: {
         coordinates: [Number],
@@ -18,11 +18,11 @@ export const UserSchema: Schema = new Schema({
     base: String,
     avaluo: String
   }],
-  demandante: [{
+  demandantes: [{
     name: String,
     cc: String
   }],
-  demandando: [{
+  demandados: [{
     name: String,
     cc: String
   }],
@@ -34,7 +34,7 @@ export const UserSchema: Schema = new Schema({
   rawid: { type: String, unique: true }
 })
 
-let generateRawId = (raw: string): string => {
+export const generateRawId = (raw: string): string => {
   return createHash('sha512').update(raw).digest('hex')
 }
 
@@ -44,6 +44,6 @@ UserSchema.pre('save',function (next) {
   next()
 })
 
-export const Remate: Model<IRenateModel> = model<IRenateModel>('Remate', UserSchema)
+export const Remate: Model<IRemateModel> = model<IRemateModel>('Remate', UserSchema)
 
 export default Remate

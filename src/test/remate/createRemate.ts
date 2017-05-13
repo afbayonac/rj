@@ -1,7 +1,7 @@
 import 'mocha'
 import {expect} from 'chai'
 import {User} from '../../app/models/user'
-import {Remate} from '../../app/models/remate'
+import {Remate, generateRawId} from '../../app/models/remate'
 import {encodeToken} from '../../app/lib/jwt'
 import {cfg} from '../../app/cfg/cfg'
 import * as supertest from 'supertest'
@@ -52,7 +52,7 @@ describe('create Remate API', function () {
   })
 
   it('constrast database', function (done) {
-    Remate.findOne({'_id': remate._id}, function (err, rematedb) {
+    Remate.findOne({'rawid': generateRawId(remate.raw)}, function (err, rematedb) {
       if (err) {
         return done(err)
       }
@@ -63,34 +63,34 @@ describe('create Remate API', function () {
       expect(rematedb.fuente).to.be.equal(remate.fuente)
       expect(rematedb.fechaLicitacion.toString()).to.be.equal(remate.fechaLicitacion.toString())
       // check demandantes
-      expect(rematedb.demandante[0].name).to.be.equal(remate.demandante[0].name)
-      expect(rematedb.demandante[0].cc).to.be.equal(remate.demandante[0].cc)
-      expect(rematedb.demandante[1].name).to.be.equal(remate.demandante[1].name)
-      expect(rematedb.demandante[1].cc).to.be.equal(remate.demandante[1].cc)
+      expect(rematedb.demandantes[0].name).to.be.equal(remate.demandantes[0].name)
+      expect(rematedb.demandantes[0].cc).to.be.equal(remate.demandantes[0].cc)
+      expect(rematedb.demandantes[1].name).to.be.equal(remate.demandantes[1].name)
+      expect(rematedb.demandantes[1].cc).to.be.equal(remate.demandantes[1].cc)
       // check demandandos
-      expect(rematedb.demandado[0].name).to.be.equal(remate.demandado[0].name)
-      expect(rematedb.demandado[0].cc).to.be.equal(remate.demandado[0].cc)
-      expect(rematedb.demandado[0].name).to.be.equal(remate.demandado[0].name)
-      expect(rematedb.demandado[0].cc).to.be.equal(remate.demandado[0].cc)
+      expect(rematedb.demandados[0].name).to.be.equal(remate.demandados[0].name)
+      expect(rematedb.demandados[0].cc).to.be.equal(remate.demandados[0].cc)
+      expect(rematedb.demandados[0].name).to.be.equal(remate.demandados[0].name)
+      expect(rematedb.demandados[0].cc).to.be.equal(remate.demandados[0].cc)
       // check item 1
-      expect(rematedb.item[0].name).to.be.equal(remate.item[0].name)
-      expect(rematedb.item[0].address).to.be.equal(remate.item[0].address)
-      expect(rematedb.item[0].base).to.be.equal(remate.item[0].base)
-      expect(rematedb.item[0].base).to.be.equal(remate.item[0].base)
+      expect(rematedb.items[0].name).to.be.equal(remate.items[0].name)
+      expect(rematedb.items[0].address).to.be.equal(remate.items[0].address)
+      expect(rematedb.items[0].base).to.be.equal(remate.items[0].base)
+      expect(rematedb.items[0].base).to.be.equal(remate.items[0].base)
       // check location item 1
-      let ldb = rematedb.item[0].location
-      let l = remate.item[0].location
+      let ldb = rematedb.items[0].location
+      let l = remate.items[0].location
       expect(ldb.type).to.be.eql(l.type)
       expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
       expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
       // check item 2
-      expect(rematedb.item[1].name).to.be.equal(remate.item[1].name)
-      expect(rematedb.item[1].address).to.be.equal(remate.item[1].address)
-      expect(rematedb.item[1].base).to.be.equal(remate.item[1].base)
-      expect(rematedb.item[1].base).to.be.equal(remate.item[1].base)
+      expect(rematedb.items[1].name).to.be.equal(remate.items[1].name)
+      expect(rematedb.items[1].address).to.be.equal(remate.items[1].address)
+      expect(rematedb.items[1].base).to.be.equal(remate.items[1].base)
+      expect(rematedb.items[1].base).to.be.equal(remate.items[1].base)
       // check location item 2
-      ldb = rematedb.item[1].location
-      l = remate.item[1].location
+      ldb = rematedb.items[1].location
+      l = remate.items[1].location
       expect(ldb.type).to.be.eql(l.type)
       expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
       expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
