@@ -9,10 +9,10 @@ export interface IUserModel extends IUser, Document {
 
 export const UserSchema: Schema = new Schema({
   name: String,
-  username: {type: String, unique: true},
-  number: {type: String, unique: true},
+  username: {type: String, index: {unique: true,  sparse: true}},
+  number: {type: String, index: {unique: true, sparse: true}},
   profileImgUrl: String,
-  facebookId: {type: String, unique: true},
+  facebookId: {type: String,  index: { unique: true, sparse: true }},
   emails: [{
     email: {type: String , unique : true},
     active: {type: Boolean, default: false},
@@ -25,7 +25,7 @@ export const UserSchema: Schema = new Schema({
   role: {
     type: String,
     default: 'user',
-    enum: ['user', 'admin']
+    enum: ['user', 'admin', 'scraper']
   },
   location: {
       type: {type: String},

@@ -27,7 +27,7 @@ export interface IUser {
   city?: string
   dateBorn?: Date
   province?: string
-  role: 'admin' | 'user'
+  role: 'admin' | 'user' | 'scraper'
   locations?: ILocation
   cred?: {
     password: string,
