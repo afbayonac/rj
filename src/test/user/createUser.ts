@@ -54,12 +54,7 @@ describe('create User API', function () {
       code = userdb.emails[0].verify[0].code
       expect(userdb.name).to.be.equal(user.name)
       expect(userdb.dateBorn.toString()).to.be.equal(user.dateBorn.toString())
-      // check location
-      let ldb = userdb.location
-      let l = user.location
-      expect(ldb.type).to.be.eql(l.type)
-      expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
-      expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
+      expect(userdb.location).to.be.eql(user.location)
       // se espera que todos los usuarios creados tengan el role de user
       expect(userdb.role).to.be.equal('user')
       expect(userdb.emails[0].active).to.be.equal(false)
