@@ -18,54 +18,50 @@ export const createUser = (req, res, next) => {
   User.findOne({ $or: [
     {username: newUser.username},
     {emails: newUser.emails[0]}
-  ]}).then((user) => {
-      if (user) {
-        return res.status(400).json({'mess': 'username or email registered'})
-      }
-      new User({
-        name: newUser.name,
-        username: newUser.username,
-        number: newUser.number,
-        emails: newUser.emails.map((e) => {
-          return {
-            email: e.email,
-            active: false,
-            verify: [mail.sendVerifyEmail(e.email, newUser.username)]
-          }
-        }),
-        gender: newUser.gender,
-        city: newUser.city,
-        dateBorn: newUser.dateBorn,
-        province: newUser.province,
-        location: newUser.location,
-        cred: {
-          password: newUser.cred.password
-        }
-      })
-      .save(function (err, user) {
-        if (err) {
-          return  res.status(500).json({'mess': 'server error'})
-        }
-        if (user) {
-          return  res.status(200).json({mess: 'user created'})
-        }
-      }
-      )
-    }, (err) => {
-      return  res.status(500).json({'mess': 'server error'})
+  ]})
+  .then((user) => {
+    if (user) {
+      return res.status(400).json({'mess': 'username or email registered'})
     }
-  )
+    new User({
+      name: newUser.name,
+      username: newUser.username,
+      number: newUser.number,
+      emails: newUser.emails.map((e) => {
+        return {
+          email: e.email,
+          active: false,
+          verify: [mail.sendVerifyEmail(e.email, newUser.username)]
+        }
+      }),
+      gender: newUser.gender,
+      city: newUser.city,
+      dateBorn: newUser.dateBorn,
+      province: newUser.province,
+      location: newUser.location,
+      cred: {
+        password: newUser.cred.password
+      }
+    })
+    .save()
+    .then((user) => res.status(200).json({mess: 'user created'}))
+    .catch((err) => res.status(500).json({'mess': 'server error'}))
+  })
+  .catch((err) => res.status(500).json({'mess': 'server error'}))
 }
 
 export const verifyEmail = (req, res, next) => {
   let id = req.query.id
   let code = req.query.code
-  User.findOne({'emails.verify._id':  Types.ObjectId(id) })
+
+  User
+  .findOne({'emails.verify._id':  Types.ObjectId(id) })
   .then((user) => {
     if (!user) {
       return res.status(400).json({'mess': 'user no found'})
     }
-    user.emails.find( (email) => {
+    // check validation code
+    user.emails.find((email) => {
       let v = email.verify.find((v) => {
         return v._id.equals(Types.ObjectId(id))
       })
@@ -78,21 +74,20 @@ export const verifyEmail = (req, res, next) => {
       email.active = true
       return true
     })
+
     user.active = true
-    user.save((err) => {
-      if (err) {
-        return  res.status(500).json({'mess': 'server error'})
-      }
-      return res.status(200).json({'mess': 'user actived'})
-    })
-  },(err) => {
-    return  res.status(500).json({'mess': 'server error'})
+    user.save()
+    .then((user) => res.status(200).json({mess: 'user actived'}))
+    .catch((err) => res.status(500).json({'mess': 'server error'}))
   })
+  .catch((err) => res.status(500).json({'mess': 'server error'}))
 }
 
 export const updateUser = (req, res, next) => {
   let attrs = req.body
-  User.findOne({'_id': req.params.idusers}).then((user) => {
+
+  User
+  .findOne({'_id': req.params.idusers}).then((user) => {
     if (!user) {
       return res.status(400).json({'mess': 'user no found'})
     }
@@ -107,7 +102,6 @@ export const updateUser = (req, res, next) => {
       }
       return res.status(200).json({'mess': 'user updated'})
     })
-  }, (err) => {
-    return  res.status(500).json({'mess': 'server error'})
   })
+  .catch((err) => res.status(500).json({'mess': 'server error'}))
 }

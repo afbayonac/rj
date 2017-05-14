@@ -10,46 +10,37 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('Update Remate API', function () {
-  let api = supertest.agent(cfg.domain)
   let token: string
-  let id: string
+
+  let api = supertest.agent(cfg.domain)
   let remate = fkRemate()
   let remateUpdate = fkRemate()
   let user = fkUser()
 
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(done, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
   })
 
   before(function (done) {
-    User.remove({}).exec(done)
+    User.remove({}).then(done()).catch(done)
   })
 
   before(function (done) {
-    Remate.remove({}).exec(done)
+    Remate.remove({}).then(done()).catch(done)
   })
 
   before(function (done) {
     new User(user)
-    .save((err, userdb) => {
-      if (err) {
-        return done(err)
-      }
-      id = userdb._id
+    .save()
+    .then((userdb) => {
       token = encodeToken(userdb)
       done()
     })
+    .catch(done)
   })
 
   before(function (done) {
-    new Remate(remate)
-    .save((err, remateid) => {
-      if (err) {
-        return done(err)
-      }
-      done()
-    })
+    new Remate(remate).save().then(done()).catch(done)
   })
 
   it('update remate', function (done) {
@@ -63,15 +54,14 @@ describe('Update Remate API', function () {
   })
 
   it('constrast database', function (done) {
-    Remate.findOne({'_id': remate._id}, function (err, rematedb) {
-      if (err) {
-        return done(err)
-      }
+    Remate.findOne({'_id': remate._id})
+    .then((rematedb) => {
       if (!rematedb) {
         return done('remate no found')
       }
       expect(rematedb.raw).to.be.not.equal(remateUpdate.raw)
       expect(rematedb.fuente).to.be.not.equal(remateUpdate.fuente)
+      expect(rematedb.juzgado).to.be.equal(remateUpdate.juzgado)
       expect(rematedb.fechaLicitacion.toString()).to.be.equal(remateUpdate.fechaLicitacion.toString())
       // check demandantes
       expect(rematedb.demandantes[0].name).to.be.equal(remateUpdate.demandantes[0].name)
@@ -107,6 +97,7 @@ describe('Update Remate API', function () {
       expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
       done()
     })
+    .catch(done)
   })
 
   after(function (done) {

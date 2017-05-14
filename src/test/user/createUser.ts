@@ -8,29 +8,27 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('create User API', function () {
+  let code: string
+  let id: string
+
   let api = supertest.agent(cfg.domain)
-  let code = ''
-  let id = ''
   let user = fkUser()
+
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(function ()  {
-      User.remove({}).exec(done)
-    }, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
+  })
+
+  before(function (done) {
+    User.remove({}).then(done()).catch(done)
   })
 
   it('create user', function (done) {
     api
     .post('/users')
     .send(user)
-    .end(function (err, res) {
-      if (err) {
-        done(err)
-      }
-      expect(res.status).to.be.equal(200,'status expect 200')
-      expect(res.body.mess).to.be.equal('user created')
-      done()
-    })
+    .expect(200, {
+      mess : 'user created'
+    }, done)
   })
 
   it('fail create user', function (done) {
@@ -43,11 +41,10 @@ describe('create User API', function () {
   })
 
   it('contrast database new User', function (done) {
-    User.findOne({'emails.email': user.emails[0].email}, function (err, userdb) {
-      if (err) {
-        return done(err)
-      }
-      if (!userdb) {
+    User
+    .findOne({'emails.email': user.emails[0].email})
+    .then((userdb) => {
+        if (!userdb) {
         return done('user no found')
       }
       // antes de las prebas para guardar variables para los siguientes tests
@@ -69,6 +66,7 @@ describe('create User API', function () {
       expect(userdb.active).to.be.equal(false)
       done()
     })
+    .catch(done)
   })
 
   it('verify email', function (done) {
@@ -80,10 +78,9 @@ describe('create User API', function () {
   })
 
   it('contrast database user verified', function (done) {
-    User.findOne({'emails.email': user.emails[0].email}, function (err, user) {
-      if (err) {
-        return done(err)
-      }
+    User
+    .findOne({'emails.email': user.emails[0].email})
+    .then((user) => {
       if (!user) {
         return done('user no found')
       }
@@ -91,9 +88,10 @@ describe('create User API', function () {
       expect(user.active).to.be.equal(true)
       done()
     })
+    .catch(done)
   })
 
   after(function (done) {
-    disconnect().then(done)
+    disconnect().then(done).catch(done)
   })
 })

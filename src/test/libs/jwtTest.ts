@@ -13,8 +13,9 @@ import {
 } from '../../app/lib/jwt'
 
 describe('json web tokens Lib', function () {
+  let token: string
+
   let reToken = /[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/
-  let token = ''
   let user = fkUser()
 
   it('encode Token', function (done) {

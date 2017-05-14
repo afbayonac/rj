@@ -11,23 +11,19 @@ describe ('Remate Model', function () {
   let remate = fkRemate()
 
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(function ()  {
-      Remate.remove({}).exec(done)
-    }, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
   })
 
   it('Generate hash',function (done) {
     new Remate(remate)
-    .save((err, rematedb) => {
-      if (err) {
-        return done(err)
-      }
+    .save()
+    .then((rematedb) => {
       expect(rematedb.rawid).to.be.a('string')
       expect(rematedb.raw).to.be.a('string')
       expect(rematedb.items[0].location.coordinates[1]).to.be.a('number')
       done()
     })
+    .catch(done)
   })
 
   after(function (done) {

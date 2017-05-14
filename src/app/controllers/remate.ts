@@ -22,24 +22,19 @@ export const createRemate = (req, res, next) => {
         proceso: newRemate.proceso,
         fechaLicitacion: newRemate.fechaLicitacion
       })
-      .save(function (err, remate) {
-        if (err) {
-          return  res.status(500).json({'mess': 'server error'})
-        }
-        if (remate) {
-          return  res.status(200).json({mess: 'remate created'})
-        }
-      }
-      )
-    }, (err) => {
-      return  res.status(500).json({'mess': 'server error'})
-    }
-  )
+      .save()
+      .then((remate) =>  res.status(200).json({'mess': 'remate created'}))
+      .catch((err) => res.status(500).json({'mess': 'server error'}))
+    })
+    .catch((err) => res.status(500).json({'mess': 'server error'}))
 }
 
 export const updateRemate = (req, res, next) => {
   let attrs = req.body
-  Remate.findOne({'_id': req.params.idremates}).then((remate) => {
+
+  Remate
+  .findOne({'_id': req.params.idremates})
+  .then((remate) => {
     if (!remate) {
       return res.status(400).json({'mess': 'remate no found'})
     }
@@ -48,13 +43,9 @@ export const updateRemate = (req, res, next) => {
     remate.demandados = attrs.demandados ? attrs.demandados : remate.demandados
     remate.juzgado = attrs.juzgado ? attrs.juzgado : remate.juzgado
     remate.fechaLicitacion = attrs.fechaLicitacion ? attrs.fechaLicitacion : remate.fechaLicitacion
-    remate.save((err) => {
-      if (err) {
-        return  res.status(500).json({'mess': 'server error'})
-      }
-      return res.status(200).json({'mess': 'remate updated'})
-    })
-  }, (err) => {
-    return  res.status(500).json({'mess': 'server error'})
+    remate.save()
+    .then(() =>  res.status(200).json({'mess': 'remate updated'}))
+    .catch((err) => res.status(500).json({'mess': 'server error'}))
   })
+  .catch((err) => res.status(500).json({'mess': 'server error'}))
 }

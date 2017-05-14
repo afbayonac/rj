@@ -10,18 +10,17 @@ const db = cfg.mongodb
 describe ('User Model', function () {
   let user = fkUser()
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(function ()  {
-      User.remove({}).exec(done)
-    }, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
+  })
+
+  before(function (done) {
+    User.remove({}).then(done()).catch(done)
   })
 
   it('Encrypt Password',function (done) {
     new User(user)
-    .save((err, userdb) => {
-      if (err) {
-        return done(err)
-      }
+    .save()
+    .then((userdb) => {
       assert.isOk(userdb.contrastPasword(user.cred.password), 'fail encrypt')
       expect(userdb.name).to.be.a('string')
       expect(userdb.username).to.be.a('string')
@@ -33,6 +32,7 @@ describe ('User Model', function () {
       expect(userdb.cred.salt).to.match(/\w{16}$/)
       done()
     })
+    .catch(done)
   })
 
   after(function (done) {

@@ -24,7 +24,7 @@ export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
   }
 }
 
-export const fkItems = (n: number = 1): IItem[] => {
+export const fkItems = (n = 1): IItem[] => {
   return  Array.from({length: n}, (v, k) => {
     return {
       name: faker.commerce.product(),
@@ -39,7 +39,7 @@ export const fkItems = (n: number = 1): IItem[] => {
   })
 }
 
-export const fkPersons = (n: number = 1): IPerson[] => {
+export const fkPersons = (n = 1): IPerson[] => {
   return  Array.from({length: n}, (v, k) => {
     return {
       name: faker.name.findName(),
@@ -48,7 +48,7 @@ export const fkPersons = (n: number = 1): IPerson[] => {
   })
 }
 
-export const fkRemate = (items: number = 2, demandantes: number = 2, demandados: number = 2 ): IRemate => {
+export const fkRemate = (items = 2, demandantes = 2, demandados = 2 ): IRemate => {
 
   return {
     _id: Types.ObjectId().toHexString(),

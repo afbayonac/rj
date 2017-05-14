@@ -9,19 +9,21 @@ import {connect, disconnect} from 'mongoose'
 const db = cfg.mongodb
 
 describe('authOwn', function () {
+  let token: string
+
   let api = supertest.agent(cfg.domain)
-  let token = ''
   let user = fkUser()
 
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(function ()  {
-      User.remove({}).exec(done)
-    }, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
   })
 
   before(function (done) {
-    new User(user).save(done())
+    User.remove({}).then(done()).catch(done)
+  })
+
+  before(function (done) {
+    new User(user).save().then(done()).catch(done)
   })
 
   it('authOwn API', function (done) {
@@ -62,6 +64,6 @@ describe('authOwn', function () {
   })
 
   after(function (done) {
-    disconnect().then(done)
+    disconnect().then(done).catch(done)
   })
 })

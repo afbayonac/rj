@@ -60,7 +60,7 @@ export const middlewareAcl = (req, res, next) => {
     return res.status(403).json({
       status: 'Access Denied',
       success: false,
-      message: 'REQUIRED: Role not found'
+      message: 'Forbidden'
     })
   })
 }

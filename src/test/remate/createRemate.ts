@@ -10,22 +10,22 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('create Remate API', function () {
-  let api = supertest.agent(cfg.domain)
   let token: string
+
+  let api = supertest.agent(cfg.domain)
   let remate = fkRemate()
   let user = fkUser('scraper')
 
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(done, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
   })
 
   before(function (done) {
-    User.remove({}).exec(done)
+    User.remove({}).then(done()).catch(done)
   })
 
   before(function (done) {
-    Remate.remove({}).exec(done)
+    Remate.remove({}).then(done()).catch(done)
   })
 
   before(function (done) {
@@ -50,10 +50,9 @@ describe('create Remate API', function () {
   })
 
   it('constrast database', function (done) {
-    Remate.findOne({'rawid': generateRawId(remate.raw)}, function (err, rematedb) {
-      if (err) {
-        return done(err)
-      }
+    Remate
+    .findOne({'rawid': generateRawId(remate.raw)})
+    .then((rematedb) => {
       if (!rematedb) {
         return done('remate no found')
       }
@@ -94,6 +93,7 @@ describe('create Remate API', function () {
       expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
       done()
     })
+    .catch(done)
   })
 
   after(function (done) {

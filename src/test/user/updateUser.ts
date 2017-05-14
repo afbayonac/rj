@@ -10,31 +10,30 @@ import {connect, disconnect, Types} from 'mongoose'
 
 const db = cfg.mongodb
 describe('Update User API', function () {
-  let api = supertest.agent(cfg.domain)
   let token: string
   let id: string
+
+  let api = supertest.agent(cfg.domain)
   let user = fkUser('user')
   let userUpdate = fkUser('admin')
 
   before(function (done) {
-    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`)
-    .then(done, done)
+    connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
   })
 
   before(function (done) {
-    User.remove({}).exec(done)
+    User.remove({}).then(done()).catch(done)
   })
 
   before(function (done) {
     new User(user)
-    .save((err, userdb) => {
-      if (err) {
-        return done(err)
-      }
+    .save()
+    .then((userdb) => {
       id = userdb._id
       token = encodeToken(userdb)
       done()
     })
+    .catch(done)
   })
 
   it('update User', function (done) {
@@ -48,10 +47,8 @@ describe('Update User API', function () {
   })
 
   it('constrast database', function (done) {
-    User.findOne({'_id': user._id}, function (err, userdb) {
-      if (err) {
-        return done(err)
-      }
+    User.findOne({'_id': user._id})
+    .then((userdb) => {
       if (!userdb) {
         return done('user no found')
       }
@@ -70,6 +67,7 @@ describe('Update User API', function () {
       expect(userdb.active).to.be.equal(true)
       done()
     })
+    .catch(done)
   })
 
   it('Fail update User', function (done) {
@@ -77,11 +75,11 @@ describe('Update User API', function () {
     .post(`/users/${Types.ObjectId()}`)
     .set('Authorization', `Bearer ${token}`)
     .send(userUpdate)
-    .end(function (err, res) {
-      expect(res.status).to.be.equal(403,'status expect 403')
-      expect(res.body).to.have.all.keys('status', 'success', 'message')
-      done()
-    })
+    .expect(403,{
+      status: 'Access Denied',
+      success: false,
+      message: 'Forbidden'
+    },done)
   })
 
   after(function (done) {
