@@ -2,6 +2,7 @@ import {cfg} from '../../app/cfg/cfg'
 import {User} from '../../app/models/user'
 import {encodeToken} from '../../app/lib/jwt'
 import {Remate} from '../../app/models/remate'
+import {IRemate} from '../../app/models/IRemate'
 
 import {expect} from 'chai'
 import * as supertest from 'supertest'
@@ -10,12 +11,11 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 describe('Update Remate API', function () {
-  let token: string
-
   let api = supertest.agent(cfg.domain)
   let remate = fkRemate()
   let remateUpdate = fkRemate()
   let user = fkUser()
+  let token = encodeToken(user)
 
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
@@ -30,17 +30,11 @@ describe('Update Remate API', function () {
   })
 
   before(function (done) {
-    new User(user)
-    .save()
-    .then((userdb) => {
-      token = encodeToken(userdb)
-      done()
-    })
-    .catch(done)
+    User.create(user).then(done()).catch(done)
   })
 
   before(function (done) {
-    new Remate(remate).save().then(done()).catch(done)
+    Remate.create(remate).then(done()).catch(done)
   })
 
   it('update remate', function (done) {
@@ -54,47 +48,26 @@ describe('Update Remate API', function () {
   })
 
   it('constrast database', function (done) {
-    Remate.findOne({'_id': remate._id})
-    .then((rematedb) => {
+    Remate
+    .findOne({'_id': remate._id})
+    .lean()
+    .then((rematedb: IRemate) => {
       if (!rematedb) {
         return done('remate no found')
       }
+      // elemtos que no cambian
       expect(rematedb.raw).to.be.not.equal(remateUpdate.raw)
       expect(rematedb.fuente).to.be.not.equal(remateUpdate.fuente)
       expect(rematedb.juzgado).to.be.equal(remateUpdate.juzgado)
-      expect(rematedb.fechaLicitacion.toString()).to.be.equal(remateUpdate.fechaLicitacion.toString())
-      // check demandantes
-      expect(rematedb.demandantes[0].name).to.be.equal(remateUpdate.demandantes[0].name)
-      expect(rematedb.demandantes[0].cc).to.be.equal(remateUpdate.demandantes[0].cc)
-      expect(rematedb.demandantes[1].name).to.be.equal(remateUpdate.demandantes[1].name)
-      expect(rematedb.demandantes[1].cc).to.be.equal(remateUpdate.demandantes[1].cc)
-      // check demandandos
-      expect(rematedb.demandados[0].name).to.be.equal(remateUpdate.demandados[0].name)
-      expect(rematedb.demandados[0].cc).to.be.equal(remateUpdate.demandados[0].cc)
-      expect(rematedb.demandados[0].name).to.be.equal(remateUpdate.demandados[0].name)
-      expect(rematedb.demandados[0].cc).to.be.equal(remateUpdate.demandados[0].cc)
-      // check item 1
-      expect(rematedb.items[0].name).to.be.equal(remateUpdate.items[0].name)
-      expect(rematedb.items[0].address).to.be.equal(remateUpdate.items[0].address)
-      expect(rematedb.items[0].base).to.be.equal(remateUpdate.items[0].base)
-      expect(rematedb.items[0].base).to.be.equal(remateUpdate.items[0].base)
-      // check location item 1
-      let ldb = rematedb.items[0].location
-      let l = remateUpdate.items[0].location
-      expect(ldb.type).to.be.eql(l.type)
-      expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
-      expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
-      // check item 2
-      expect(rematedb.items[1].name).to.be.equal(remateUpdate.items[1].name)
-      expect(rematedb.items[1].address).to.be.equal(remateUpdate.items[1].address)
-      expect(rematedb.items[1].base).to.be.equal(remateUpdate.items[1].base)
-      expect(rematedb.items[1].base).to.be.equal(remateUpdate.items[1].base)
-      // check location item 2
-      ldb = rematedb.items[1].location
-      l = remateUpdate.items[1].location
-      expect(ldb.type).to.be.eql(l.type)
-      expect(ldb.coordinates[0]).to.be.eql(l.coordinates[0])
-      expect(ldb.coordinates[1]).to.be.eql(l.coordinates[1])
+      // elemetos que deberian actualizarse
+      expect(rematedb.fechaLicitacion).to.be.eql(remateUpdate.fechaLicitacion)
+      expect(rematedb.demandantes).to.be.eql(remateUpdate.demandantes)
+      expect(rematedb.demandados).to.be.eql(remateUpdate.demandados)
+      rematedb.items.map((item) => {
+        item._id = item._id.toString()
+        return item
+      })
+      expect(rematedb.items).to.be.eql(remateUpdate.items)
       done()
     })
     .catch(done)

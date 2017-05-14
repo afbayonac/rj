@@ -1,20 +1,19 @@
 import {cfg} from '../../app/cfg/cfg'
 import {User} from '../../app/models/user'
-import {Remate} from '../../app/models/remate'
+import {IUser} from '../../app/models/IUser'
 import {encodeToken} from '../../app/lib/jwt'
 
 import {expect} from 'chai'
+import {fkUser} from '../fakers'
 import * as supertest from 'supertest'
-import {fkUser, fkRemate} from '../fakers'
 import {connect, disconnect, Types} from 'mongoose'
 
 const db = cfg.mongodb
 describe('Update User API', function () {
-  let token: string
-  let id: string
 
   let api = supertest.agent(cfg.domain)
   let user = fkUser('user')
+  let token = encodeToken(user)
   let userUpdate = fkUser('admin')
 
   before(function (done) {
@@ -26,19 +25,12 @@ describe('Update User API', function () {
   })
 
   before(function (done) {
-    new User(user)
-    .save()
-    .then((userdb) => {
-      id = userdb._id
-      token = encodeToken(userdb)
-      done()
-    })
-    .catch(done)
+    User.create(user).then(done()).catch(done)
   })
 
   it('update User', function (done) {
     api
-    .post(`/users/${id}`)
+    .post(`/users/${user._id}`)
     .set('Authorization', `Bearer ${token}`)
     .send(userUpdate)
     .expect(200, {
@@ -47,8 +39,10 @@ describe('Update User API', function () {
   })
 
   it('constrast database', function (done) {
-    User.findOne({'_id': user._id})
-    .then((userdb) => {
+    User
+    .findOne({'_id': user._id})
+    .lean()
+    .then((userdb: IUser) => {
       if (!userdb) {
         return done('user no found')
       }
@@ -57,12 +51,7 @@ describe('Update User API', function () {
       expect(userdb.province).to.be.equal(userUpdate.province)
       expect(userdb.city).to.be.equal(userUpdate.city)
       expect(userdb.gender).to.be.equal(userUpdate.gender)
-      // check location
-      let l = userdb.location
-      let ul = userUpdate.location
-      expect(l.type).to.be.eql(ul.type)
-      expect(l.coordinates[0]).to.be.eql(ul.coordinates[0])
-      expect(l.coordinates[1]).to.be.eql(ul.coordinates[1])
+      expect(userdb.location).to.be.eql(userUpdate.location)
       expect(userdb.role).to.be.equal('user')
       expect(userdb.active).to.be.equal(true)
       done()

@@ -1,4 +1,5 @@
 export interface IItem {
+  _id: string
   name: string
   location?: ILocation
   address?: string

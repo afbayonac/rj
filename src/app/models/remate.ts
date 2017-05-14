@@ -19,10 +19,12 @@ export const UserSchema: Schema = new Schema({
     avaluo: String
   }],
   demandantes: [{
+    _id: false,
     name: String,
     cc: String
   }],
   demandados: [{
+    _id: false,
     name: String,
     cc: String
   }],

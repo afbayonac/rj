@@ -27,6 +27,7 @@ export const fkUser = (role: 'user' | 'admin'| 'scraper' = 'admin'): IUser => {
 export const fkItems = (n = 1): IItem[] => {
   return  Array.from({length: n}, (v, k) => {
     return {
+      _id: Types.ObjectId().toHexString(),
       name: faker.commerce.product(),
       address: faker.address.streetAddress(),
       location: {

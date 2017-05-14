@@ -1,5 +1,6 @@
 import {cfg} from '../../app/cfg/cfg'
 import {User} from '../../app/models/user'
+import {IUser} from '../../app/models/IUser'
 
 import {fkUser} from '../fakers'
 import * as supertest from 'supertest'
@@ -43,8 +44,9 @@ describe('create User API', function () {
   it('contrast database new User', function (done) {
     User
     .findOne({'emails.email': user.emails[0].email})
-    .then((userdb) => {
-        if (!userdb) {
+    .lean()
+    .then((userdb: IUser) => {
+      if (!userdb) {
         return done('user no found')
       }
       // antes de las prebas para guardar variables para los siguientes tests
