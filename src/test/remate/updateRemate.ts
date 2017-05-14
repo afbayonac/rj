@@ -52,9 +52,7 @@ describe('Update Remate API', function () {
     .findOne({'_id': remate._id})
     .lean()
     .then((rematedb: IRemate) => {
-      if (!rematedb) {
-        return done('remate no found')
-      }
+      expect(rematedb).to.exist
       // elemtos que no cambian
       expect(rematedb.raw).to.be.not.equal(remateUpdate.raw)
       expect(rematedb.fuente).to.be.not.equal(remateUpdate.fuente)

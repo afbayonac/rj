@@ -46,9 +46,7 @@ describe('create User API', function () {
     .findOne({'emails.email': user.emails[0].email})
     .lean()
     .then((userdb: IUser) => {
-      if (!userdb) {
-        return done('user no found')
-      }
+      expect(userdb).to.exist
       // antes de las prebas para guardar variables para los siguientes tests
       id = userdb.emails[0].verify[0]._id
       code = userdb.emails[0].verify[0].code
@@ -78,9 +76,7 @@ describe('create User API', function () {
     User
     .findOne({'emails.email': user.emails[0].email})
     .then((user) => {
-      if (!user) {
-        return done('user no found')
-      }
+      expect(user).to.exist
       expect(user.role).to.be.equal('user')
       expect(user.active).to.be.equal(true)
       done()

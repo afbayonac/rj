@@ -33,10 +33,8 @@ describe('read user api', function () {
     .get(`/users/${users[0]._id}`)
     .set('Authorization', `Bearer ${encodeToken(users[0])}`)
     .expect(200)
-    .end((err, res) => {
-      if (err) {
-        done(err)
-      }
+    .then((res) => {
+      expect(res).to.exist
       expect(res.name).to.be.equal(users[1].name)
       expect(res.dateBorn).to.be.eql(users[1].dateBorn)
       expect(res.province).to.be.equal(users[1].province)
@@ -47,6 +45,7 @@ describe('read user api', function () {
       expect(res.active).to.be.equal(true)
       done()
     })
+    .catch(done)
   })
 
   it('fail read user', function (done) {

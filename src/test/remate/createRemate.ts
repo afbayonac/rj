@@ -30,14 +30,12 @@ describe('create Remate API', function () {
   })
 
   before(function (done) {
-    new User(user)
-    .save((err, userdb) => {
-      if (err) {
-        return done(err)
-      }
+    User.create(user)
+    .then(( userdb) => {
       token = encodeToken(userdb)
       done()
     })
+    .catch(done)
   })
 
   it('create remate', function (done) {
@@ -55,9 +53,7 @@ describe('create Remate API', function () {
     .findOne({'rawid': generateRawId(remate.raw)})
     .lean()
     .then((rematedb: IRemate) => {
-      if (!rematedb) {
-        return done('remate no found')
-      }
+      expect(rematedb).to.exist
       expect(rematedb.raw).to.be.equal(remate.raw)
       expect(rematedb.fuente).to.be.equal(remate.fuente)
       expect(rematedb.fechaLicitacion).to.be.eql(remate.fechaLicitacion)

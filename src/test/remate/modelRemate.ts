@@ -18,6 +18,7 @@ describe ('Remate Model', function () {
     Remate
     .create(remate)
     .then((rematedb) => {
+      expect(remate).to.exist
       expect(rematedb.rawid).to.be.a('string')
       expect(rematedb.raw).to.be.a('string')
       done()

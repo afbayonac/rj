@@ -22,6 +22,7 @@ describe ('User Model', function () {
     .save()
     .then((userdb) => {
       assert.isOk(userdb.contrastPasword(user.cred.password), 'fail encrypt')
+      expect(userdb).to.exist
       expect(userdb.name).to.be.a('string')
       expect(userdb.username).to.be.a('string')
       expect(userdb.number).to.be.a('string')

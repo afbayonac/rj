@@ -43,9 +43,7 @@ describe('Update User API', function () {
     .findOne({'_id': user._id})
     .lean()
     .then((userdb: IUser) => {
-      if (!userdb) {
-        return done('user no found')
-      }
+      expect(userdb).to.exist
       expect(userdb.name).to.be.equal(userUpdate.name)
       expect(userdb.dateBorn.toString()).to.be.equal(userUpdate.dateBorn.toString())
       expect(userdb.province).to.be.equal(userUpdate.province)
