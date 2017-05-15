@@ -13,7 +13,9 @@ export const aclist = [
     roles: 'user',
     allows: [
       {resources: '/', permissions: ['GET']},
-      {resources: '/users/:idusers', permissions: ['POST']}
+      {resources: '/users/:idusers', permissions: ['POST', 'GET']},
+      {resources: '/remates', permissions: ['GET']},
+      {resources: '/remates/:idremates', permissions: ['GET']}
     ]
   },{
     roles: 'scraper',
@@ -24,5 +26,19 @@ export const aclist = [
   }, {
     roles: 'admin',
     allows: []
+  }
+]
+
+// dinamicId persimisos
+// restringe el un recurso dado en funcion del Id usuario que hace la peticon
+// contrario de aclist que deniega el ingreso check jwt ->_id param :usersid
+// example: solo se puede actulizar a si msimo
+
+export const rlcByUserId = [
+  {
+    roles: ['user', 'scraper'],
+    deny: [
+      { resources: '/users/:idusers', restrict: ['POST', 'GET']}
+    ]
   }
 ]
