@@ -7,7 +7,7 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 
-describe ('User Model', function () {
+describe ('user model', function () {
   let user = fkUser()
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
@@ -17,9 +17,9 @@ describe ('User Model', function () {
     User.remove({}).then(done()).catch(done)
   })
 
-  it('Encrypt Password',function (done) {
-    new User(user)
-    .save()
+  it('encrypt password',function (done) {
+    User
+    .create(user)
     .then((userdb) => {
       assert.isOk(userdb.contrastPasword(user.cred.password), 'fail encrypt')
       expect(userdb).to.exist

@@ -9,7 +9,7 @@ import {fkUser, fkRemate} from '../fakers'
 import {connect, disconnect, Types} from 'mongoose'
 
 const db = cfg.mongodb
-describe('read user api', function () {
+describe('read user by id api', function () {
   let api = supertest.agent(cfg.domain)
   let users = Array.from({length: 2}, (v, k) => fkUser('user'))
 
@@ -30,19 +30,21 @@ describe('read user api', function () {
 
   it('read user', function (done) {
     api
-    .get(`/users/${users[0]._id}`)
-    .set('Authorization', `Bearer ${encodeToken(users[0])}`)
+    .get(`/users/${users[1]._id}`)
+    .set('Authorization', `Bearer ${encodeToken(users[1])}`)
     .expect(200)
     .then((res) => {
-      expect(res).to.exist
-      expect(res.name).to.be.equal(users[1].name)
-      expect(res.dateBorn).to.be.eql(users[1].dateBorn)
-      expect(res.province).to.be.equal(users[1].province)
-      expect(res.city).to.be.equal(users[1].city)
-      expect(res.gender).to.be.equal(users[1].gender)
-      expect(res.location).to.be.eql(users[1].location)
-      expect(res.role).to.be.equal('user')
-      expect(res.active).to.be.equal(true)
+      let user = res.body
+      expect(user).to.exist
+      expect(user.cred).to.not.exist
+      expect(user.name).to.be.equal(users[1].name)
+      expect(user.dateBorn).to.be.eql(users[1].dateBorn.toISOString())
+      expect(user.province).to.be.equal(users[1].province)
+      expect(user.city).to.be.equal(users[1].city)
+      expect(user.gender).to.be.equal(users[1].gender)
+      expect(user.location).to.be.eql(users[1].location)
+      expect(user.role).to.be.equal('user')
+      expect(user.active).to.be.equal(true)
       done()
     })
     .catch(done)

@@ -10,7 +10,7 @@ import {fkUser, fkRemate} from '../fakers'
 import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
-describe('create Remate API', function () {
+describe('create remate api', function () {
   let token: string
 
   let api = supertest.agent(cfg.domain)

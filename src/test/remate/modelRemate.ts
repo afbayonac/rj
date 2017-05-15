@@ -7,14 +7,14 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 
-describe ('Remate Model', function () {
+describe ('remate model', function () {
   let remate = fkRemate()
 
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
   })
 
-  it('Generate hash',function (done) {
+  it('generate hash',function (done) {
     Remate
     .create(remate)
     .then((rematedb) => {

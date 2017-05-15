@@ -8,7 +8,7 @@ import {expect, should, assert} from 'chai'
 import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
-describe('create User API', function () {
+describe('create user api', function () {
   let code: string
   let id: string
 
@@ -41,7 +41,7 @@ describe('create User API', function () {
     },done)
   })
 
-  it('contrast database new User', function (done) {
+  it('contrast database', function (done) {
     User
     .findOne({'emails.email': user.emails[0].email})
     .lean()

@@ -18,20 +18,20 @@ describe('json web tokens Lib', function () {
   let reToken = /[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/
   let user = fkUser()
 
-  it('encode Token', function (done) {
+  it('encode token', function (done) {
     token = encodeToken(user)
     expect(token).to.match(reToken)
     done()
   })
 
-  it('dencode Token', function (done) {
+  it('dencode token', function (done) {
     let decode = decodeToken(token)
     expect(decode).to.have.all.keys('header', 'payload', 'signature')
     expect(decode.payload).to.not.have.any.keys('cred', 'emails', 'name')
     done()
   })
 
-  it('refresh Token', function (done) {
+  it('refresh token', function (done) {
     // el test se encarda de refrescar el test despues de un segundo para que
     // que el token cambie
     setTimeout( function () {
@@ -43,7 +43,7 @@ describe('json web tokens Lib', function () {
     })}, 1000)
   })
 
-  it('verify Token', function (done) {
+  it('verify token', function (done) {
     verifyToken(token,(err, decode) => {
       if (err) {
         return done('token verify fail')
@@ -53,7 +53,7 @@ describe('json web tokens Lib', function () {
     })
   })
 
-  it('stanadard response Toker', function (done) {
+  it('stanadard response toker', function (done) {
     let stanadard = stdResToken(user)
     expect(stanadard).to.have.all.keys('access_token', 'token_type', 'expired_in')
     done()

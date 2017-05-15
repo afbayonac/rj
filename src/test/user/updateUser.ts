@@ -9,7 +9,7 @@ import * as supertest from 'supertest'
 import {connect, disconnect, Types} from 'mongoose'
 
 const db = cfg.mongodb
-describe('Update User API', function () {
+describe('update user api', function () {
 
   let api = supertest.agent(cfg.domain)
   let user = fkUser('user')
@@ -28,7 +28,7 @@ describe('Update User API', function () {
     User.create(user).then(done()).catch(done)
   })
 
-  it('update User', function (done) {
+  it('update user api', function (done) {
     api
     .post(`/users/${user._id}`)
     .set('Authorization', `Bearer ${token}`)
@@ -57,7 +57,7 @@ describe('Update User API', function () {
     .catch(done)
   })
 
-  it('Fail update User', function (done) {
+  it('fail update User', function (done) {
     api
     .post(`/users/${Types.ObjectId()}`)
     .set('Authorization', `Bearer ${token}`)

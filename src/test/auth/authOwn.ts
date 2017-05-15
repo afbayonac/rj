@@ -8,7 +8,7 @@ import {connect, disconnect} from 'mongoose'
 
 const db = cfg.mongodb
 
-describe('authOwn', function () {
+describe('auth own api', function () {
   let token: string
 
   let api = supertest.agent(cfg.domain)
@@ -23,10 +23,10 @@ describe('authOwn', function () {
   })
 
   before(function (done) {
-    new User(user).save().then(done()).catch(done)
+    User.create(user).then(done()).catch(done)
   })
 
-  it('authOwn API', function (done) {
+  it('auth own', function (done) {
     api
     .post('/auth')
     .type('form')

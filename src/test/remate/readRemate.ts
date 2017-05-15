@@ -11,9 +11,13 @@ import {connect, disconnect} from 'mongoose'
 const db = cfg.mongodb
 describe('read remates api', function () {
   let api = supertest.agent(cfg.domain)
-  let remate = fkRemate()
+  let remates =  Array.from({length: 100}, (v, k) => fkRemate())
   let user = fkUser()
   let token = encodeToken(user)
+  // seleciona una numero de elementos rando m por pagina
+  let count = Math.floor(Math.random() * 19 ) + 1
+  // seleciona una pagina al azar
+  let page = Math.floor(Math.random() * ( (remates.length / count) - 1 ) ) + 1
 
   before(function (done) {
     connect(`mongodb://${db.hostname}:${db.port}/${db.name}`, done)
@@ -32,23 +36,21 @@ describe('read remates api', function () {
   })
 
   before(function (done) {
-    Remate.create(remate).then(done()).catch(done)
+    Remate.create(remates).then(done()).catch(done)
   })
 
   it('read remates', function (done) {
     api
-    .get(`/remates/${remate._id}`)
+    .get(`/remates?page=${page}&&count=${count = 1}`)
     .set('Authorization', `Bearer ${token}`)
     .expect(200)
     .then((res) => {
-      expect(res).to.exist
-      expect(res.raw).to.be.equal(remate.raw)
-      expect(res.fuente).to.be.equal(remate.fuente)
-      expect(res.juzgado).to.be.equal(remate.juzgado)
-      expect(res.fechaLicitacion).to.be.eql(remate.fechaLicitacion)
-      expect(res.demandantes).to.be.eql(remate.demandantes)
-      expect(res.demandados).to.be.eql(remate.demandados)
-      expect(res.items).to.be.eql(remate.items)
+      let body = res.body
+      expect(body).to.exist
+      expect(body.page).to.be.equal(page)
+      expect(body.limit).to.be.equal(count)
+      expect(body.total).to.be.equal(remates.length)
+      expect(body.docs.length).to.be.equal(count)
       done()
     })
     .catch(done)
