@@ -1,11 +1,14 @@
-import {Document, Schema, Model, model} from 'mongoose'
+import {Document, Schema, Model, model, PaginateModel} from 'mongoose'
 import {IRemate} from './IRemate'
-import {createHash } from 'crypto'
+import {createHash} from 'crypto'
+import * as mp from 'mongoose-paginate'
 
 export interface IRemateModel extends IRemate, Document {
   _id: string
   generateRawId (raw: string): string
 }
+
+export interface IRemateModelPaginate<T extends Document> extends PaginateModel<T> {}
 
 export const UserSchema: Schema = new Schema({
   items: [{
@@ -46,6 +49,8 @@ UserSchema.pre('save',function (next) {
   next()
 })
 
-export const Remate: Model<IRemateModel> = model<IRemateModel>('Remate', UserSchema)
+UserSchema.plugin(mp)
+
+export const Remate: IRemateModelPaginate<IRemateModel> = model<IRemateModel>('Remate', UserSchema)
 
 export default Remate

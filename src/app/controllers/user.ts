@@ -85,9 +85,11 @@ export const verifyEmail = (req, res, next) => {
 
 export const updateUser = (req, res, next) => {
   let attrs = req.body
+  let id = req.params.idusers
 
   User
-  .findOne({'_id': req.params.idusers}).then((user) => {
+  .findById(id)
+  .then((user) => {
     if (!user) {
       return res.status(400).json({'mess': 'user no found'})
     }
@@ -102,6 +104,22 @@ export const updateUser = (req, res, next) => {
       }
       return res.status(200).json({'mess': 'user updated'})
     })
+  })
+  .catch((err) => res.status(500).json({'mess': 'server error'}))
+}
+
+export const readUserById = (req, res, next) => {
+  let id = req.params.idusers
+
+  User
+  .findById(id)
+  .lean()
+  .select('-_id -cred -__v')
+  .then((user) => {
+    if (!user) {
+      return res.status(400).json({'mess': 'user no found'})
+    }
+    return res.status(200).json(user)
   })
   .catch((err) => res.status(500).json({'mess': 'server error'}))
 }

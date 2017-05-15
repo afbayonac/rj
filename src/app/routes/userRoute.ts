@@ -1,5 +1,10 @@
 import {Router} from 'express'
-import {createUser, verifyEmail, updateUser} from '../controllers/user'
+import {
+  createUser,
+  verifyEmail,
+  updateUser,
+  readUserById
+} from '../controllers/user'
 
 export const userRouter = Router()
 
@@ -11,3 +16,6 @@ userRouter.get('/verify', verifyEmail)
 
 // update user
 userRouter.post('/:idusers', updateUser)
+
+// read user By Id
+userRouter.get('/:idusers', readUserById)
